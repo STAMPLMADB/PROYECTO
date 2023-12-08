@@ -5,14 +5,13 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "test": "nodemon src/server.js",
-    "start": "nodemon src/server.js",
-    "initDb": "nodemon src/db/initDb.js",
-    "resetDb": "nodemon src/db/resetDb.js",
-    "dropDb": "nodemon src/db/dropDb.js" 
+    "dev": "nodemon src/server.js",
+    "initDb": "node src/db/initDb.js",
+    "dropDb": "node src/db/dropDb.js", 
+    "resetDb": "node src/db/dropDb.js && node src/db/initDb.js"
   },
   "keywords": [],
-  "author": "Luis Dominguez, Dani, Marta, Miguel, Juan Gabriel",
+  "author": "Luis Manuel Dominguez, Dani Vazquez, Marta Dieguez, Miguel Dario Garcia Quintas, Juan Gabriel Callejo",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
