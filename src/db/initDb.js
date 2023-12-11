@@ -1,4 +1,4 @@
-import {pool} from "./pool.js";
+import pool from "./pool.js";
 import useDb from "./useDb.js";
 
 export const initDb = async () => {
