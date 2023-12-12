@@ -10,7 +10,7 @@ const productController = {
       next(error);
     }
   },
-
+  // por id 
   getProductsByUserId: async (req, res, next) => {
     try {
       const { userId } = req.params;
@@ -31,7 +31,20 @@ const productController = {
     }
   },
 
-  // Resto de controladores para actualizar, eliminar, etc.
+    // crear product engarzandolo con id user  //
+
+// revisar enviar por paramas?
+      createProduct: async (req, res, next) => {
+        try {
+          const productData = req.body;
+          const sellerId = req.user.id; // user.id  no lo tengo claro 
+          const productId = await Product.createProduct(productData, sellerId);
+          res.status(201).json({ id: productId, message: 'Producto creado exitosamente' });
+        } catch (error) {
+          next(error);
+        }
+      },
+    
 };
 
 export default productController;

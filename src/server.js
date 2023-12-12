@@ -22,6 +22,10 @@ app.post("/login", login);
 // 
 app.get('/products', productController.getAllProducts);
 app.get('/products/user/:userId', productController.getProductsByUserId);
+app.post('/products1', productController.createProduct);
+
+
+// id seller product
 app.post('/products', productController.createProduct);
 
 app.listen(PORT, () => {
