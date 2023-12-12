@@ -1,8 +1,5 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import selectUserByEmail from "../../models/users/selectUserByEmail.js";
-import generateError from "../../utils/generateError.js";
-
 
 const login = async (req, res, next) => {
   try {
@@ -11,19 +8,19 @@ const login = async (req, res, next) => {
     const userDb = await selectUserByEmail(email);
 
     if (!userDb) {
-      generateError("El email es incorrecto",400);
+      return res.status(400).send("El email es incorrecto");
     }
 
     const isPasswordOk = await bcrypt.compare(password, userDb.password);
 
     if (!isPasswordOk) {
-      generateError("La contraseña es incorrecta",400);
+      return res.status(400).send("La contraseña es incorrecta");
     }
 
     // Revisar cómo se obtiene userDb.isEmailValidated de la base de datos
 
-    if (userDb.isEmailValidated === 0) {
-      generateError("La cuenta no ha sido verificada, revisa tu email",400);
+    if (userDb.isEmailValidated === false) {
+      return res.status(400).send("La cuenta no ha sido verificada, revisa tu email");
     }
 
     // Si todos los controles son exitosos, puedes generar el token JWT aquí
@@ -33,7 +30,7 @@ const login = async (req, res, next) => {
       expiresIn: "7d",
     });
 
-    res.send({ message: "Loggeado correctamente", data: { token } });
+    res.send({ message: "Login correcto" });
   } catch (error) {
     next(error);
   }
