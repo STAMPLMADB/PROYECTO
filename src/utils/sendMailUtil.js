@@ -1,5 +1,6 @@
 //importamos nuestras dependencias
-
+import { v4 as uuidv4 } from "uuid";
+//import { verificationCode } from "../controllers/users/register.js";
 import nodemailer from "nodemailer";
 
 import { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } from "../../env.js";
@@ -17,18 +18,23 @@ const transport = nodemailer.createTransport({
 
 //efectuar el envío del correo al usuario
 //aquí lo que está dentro del parentesis son parametros
-const sendMailUtil = async (email, subject, body) => {
+
+const sendMailUtil = async (email, verificationCode) => {
   // envia el mail con el debido objeto de transporte
   try {
+
     const mailOptions = {
       from: SMTP_USER,
       to: email,
-      subject: subject,
-      text: body,
+      subject: "Verificacion de cuenta",
+      text: `¡Gracias por registrarte! Tu código de verificación es: ${verificationCode}`,
     };
     await transport.sendMail(mailOptions);
+
+    return verificationCode;
+
   } catch (error) {
-    console.error("Ufff ha ocurrido un error en el envío!!");
+    console.error("Ufff ha ocurrido un error en el envío!!", error);
   }
 };
 
