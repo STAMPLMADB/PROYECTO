@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import pool from "../../db/pool.js";
 import sendMailUtil from "../../utils/sendMailUtil.js";
+import selectUserByEmail from "../../models/users/selectUserByEmail.js";
 
 const register = async (req, res, next) => {
   try {
@@ -36,16 +37,12 @@ const register = async (req, res, next) => {
   }
 };
 
-
-const selectUserByEmail = async (email) => {
-  const [[userWithSameEmail]] = await pool.query(
-    "SELECT * FROM users WHERE email = ?",
-    [email]
-  );
-  return userWithSameEmail;
-};
-
-const insertUser = async ({ name, email, hashedPassword, verificationCode }) => {
+const insertUser = async ({
+  name,
+  email,
+  hashedPassword,
+  verificationCode,
+}) => {
   const [{ insertId }] = await pool.query(
     "INSERT INTO users (name, email, password, verification_code) VALUES (?, ?, ?, ?)",
     [name, email, hashedPassword, verificationCode]
@@ -53,4 +50,4 @@ const insertUser = async ({ name, email, hashedPassword, verificationCode }) => 
   return insertId;
 };
 
-export default register;
+export { register, selectUserByEmail };
