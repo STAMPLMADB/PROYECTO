@@ -1,8 +1,7 @@
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
-import pool from "../../db/pool.js";
 import { sendMailUtil } from "../../utils/index.js";
-import selectUserByEmail from "../../models/users/selectUserByEmail.js";
+import {selectUserByEmail, insertUser} from "../../models/users/index.js"
 
 const register = async (req, res, next) => {
   try {
@@ -37,17 +36,6 @@ const register = async (req, res, next) => {
   }
 };
 
-const insertUser = async ({
-  name,
-  email,
-  hashedPassword,
-  verificationCode,
-}) => {
-  const [{ insertId }] = await pool.query(
-    "INSERT INTO users (name, email, password, verification_code) VALUES (?, ?, ?, ?)",
-    [name, email, hashedPassword, verificationCode]
-  );
-  return insertId;
-};
 
-export { register, selectUserByEmail };
+
+export { register };

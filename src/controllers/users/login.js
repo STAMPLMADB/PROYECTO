@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import selectUserByEmail from "../../models/users/selectUserByEmail.js";
+import {selectUserByEmail} from "../../models/users/index.js";
 import { generateError } from "../../utils/index.js";
 const login = async (req, res, next) => {
   try {

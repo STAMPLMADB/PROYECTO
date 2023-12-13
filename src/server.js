@@ -1,7 +1,6 @@
 import express from "express";
 import { PORT } from "../env.js";
 import useDb from "./db/useDb.js";
-import pool from "./db/pool.js";
 import { register } from "./controllers/users/register.js";
 import verify from "./controllers/users/verify.js";
 import login from "./controllers/users/login.js";
@@ -14,6 +13,7 @@ import {
 } from "./controllers/products/products.js";
 import { authenticateToken } from "./middlewares/index.js";
 import { handleError } from "./middlewares/index.js";
+import { updateUser } from "./controllers/users/updateUser.js";
 const app = express();
 
 useDb();
@@ -37,6 +37,8 @@ app.use(handleError);
 app.post("/products", createProduct);
 //vincular id s producto solo pueden darlo de alta
 app.post("/products/user", authenticateToken, createProductId);
+// modificar usuario
+app.put("/profile", updateUser);
 
 app.listen(PORT, () => {
   console.log(`SERVIDOR ACTIVO ${PORT}`);
