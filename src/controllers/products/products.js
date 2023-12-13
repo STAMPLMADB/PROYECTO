@@ -1,7 +1,7 @@
 import Product from '../../models/products/selectProduct.js';
 
 
-
+ /// trae todos lo productos
   const getAllProducts = async (req, res, next) => {
     try {
       const products = await Product.getAllProducts();
@@ -10,7 +10,7 @@ import Product from '../../models/products/selectProduct.js';
       next(error);
     }
   }
-  // por id 
+  // por id  no tiene sentido 
  const getProductsByUserId = async (req, res, next) => {
     try {
       const { userId } = req.params;
@@ -20,7 +20,8 @@ import Product from '../../models/products/selectProduct.js';
       next(error);
     }
   }
-
+ /// ok generamos productos pero sin vincular al id funciona guay pero 
+ // no es lo correcto
   const createProduct = async (req, res, next) => {
     try {
       const productData = req.body;
@@ -32,7 +33,7 @@ import Product from '../../models/products/selectProduct.js';
   }
 
     // crear product engarzandolo con id user  //
-
+  // token y rollos ??
 // revisar enviar por paramas?
      const createProductId = async (req, res, next) => {
         try {
@@ -44,6 +45,24 @@ import Product from '../../models/products/selectProduct.js';
           next(error);
         }
       }
-    
 
-export{ getAllProducts, createProduct,createProductId,getProductsByUserId}
+    //  BUSCADOR por body quizas mejor por params ... va bien 
+    const searchProducts = async (req, res, next) => {
+      try {
+        const { name, category, seller, price } = req.query;
+    
+        const searchParams = {
+          name,
+          category,
+          seller,
+          price
+       
+        };
+    
+        const products = await Product.searchProducts(searchParams);
+        res.status(200).json(products);
+      } catch (error) {
+        next(error);
+      }
+    }
+export{ getAllProducts, createProduct,createProductId,getProductsByUserId, searchProducts}

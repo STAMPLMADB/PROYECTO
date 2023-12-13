@@ -5,7 +5,7 @@ import pool from "./db/pool.js";
 import {register} from "./controllers/users/register.js";
 import verify from "./controllers/users/verify.js";
 import login from "./controllers/users/login.js";
-import {getAllProducts, createProduct,createProductId,getProductsByUserId}  from "./controllers/products/products.js"
+import {getAllProducts, createProduct,createProductId,getProductsByUserId,searchProducts}  from "./controllers/products/products.js"
 
 const app = express();
 
@@ -22,11 +22,14 @@ app.post("/login", login);
 // 
 app.get('/products', getAllProducts);
 app.get('/products/user/:userId', getProductsByUserId);
-app.post('/products1', createProductId);
+
+app.post('/products/search', searchProducts);
 
 
-// id seller product
+// id seller a mano:  product sin problema 
 app.post('/products', createProduct);
+ //vincular id s producto solo pueden darlo de alta
+app.post('/products/user', createProductId);
 
 app.listen(PORT, () => {
   console.log(`SERVIDOR ACTIVO ${PORT}`);
