@@ -6,6 +6,7 @@ import {register} from "./controllers/users/register.js";
 import verify from "./controllers/users/verify.js";
 import login from "./controllers/users/login.js";
 import {getAllProducts, createProduct,createProductId,getProductsByUserId,searchProducts}  from "./controllers/products/products.js"
+import authenticateToken from "./middleware/middleToken.js"
 
 const app = express();
 
@@ -29,7 +30,7 @@ app.post('/products/search', searchProducts);
 // id seller a mano:  product sin problema 
 app.post('/products', createProduct);
  //vincular id s producto solo pueden darlo de alta
-app.post('/products/user', createProductId);
+app.post('/products/user',authenticateToken, createProductId);
 
 app.listen(PORT, () => {
   console.log(`SERVIDOR ACTIVO ${PORT}`);
