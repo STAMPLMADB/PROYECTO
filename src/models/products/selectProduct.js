@@ -54,7 +54,7 @@ const Product = {
   },
 
 
-  createProduct: async (productData, sellerId) => {
+  createProductId: async (productData, sellerId) => {
     try {
       const {
         name,
