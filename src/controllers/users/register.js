@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import pool from "../../db/pool.js";
-import sendMailUtil from "../../utils/sendMailUtil.js";
+import { sendMailUtil } from "../../utils/index.js";
 import selectUserByEmail from "../../models/users/selectUserByEmail.js";
 
 const register = async (req, res, next) => {
