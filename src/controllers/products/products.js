@@ -49,20 +49,25 @@ import Product from '../../models/products/selectProduct.js';
     //  BUSCADOR por body quizas mejor por params ... va bien 
     const searchProducts = async (req, res, next) => {
       try {
-        const { name, category, seller, price } = req.query;
+        const { name, category, seller, price, location } = req.body;
+        console.log('Datos de búsqueda:', { name, category, seller, price });
     
         const searchParams = {
           name,
           category,
           seller,
-          price
-       
+          price,
+        
         };
+    
+        
+        Object.keys(searchParams).forEach(key => searchParams[key] === undefined && delete searchParams[key]);
     
         const products = await Product.searchProducts(searchParams);
         res.status(200).json(products);
       } catch (error) {
         next(error);
       }
-    }
+    };
+    
 export{ getAllProducts, createProduct,createProductId,getProductsByUserId, searchProducts}
