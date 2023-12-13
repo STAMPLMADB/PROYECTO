@@ -56,7 +56,7 @@ const Product = {
 
  
 // BUSCADOR CATEGORIAS  va ok 
-searchProducts: async ({ name, category, seller,price }) => {
+searchProducts: async ({ name, category, sellerId,price,location}) => {
   const queryParams = [];
   let query = 'SELECT * FROM products WHERE 1 = 1'; // Usamos WHERE 1 = 1 para concatenar condiciones  1=1 siempre es true y pasamos a valorar lo sig : 
   // lo habia hecho distinto que el rollo and pero mejor asi xp no hay q
@@ -73,14 +73,18 @@ searchProducts: async ({ name, category, seller,price }) => {
     queryParams.push(`%${category}%`);
   }
 
-  if (seller) {
+  if (sellerId) {
     query += ' AND sellerId = ?';
-    queryParams.push(seller);
+    queryParams.push(sellerId);
   }
 // un beetween de precios ....
-  if (price !== undefined && !isNaN(price)) {
-    query += ' AND price >= ?';
+  if (price) {
+    query += ' AND price = ?';
     queryParams.push(price);
+  }
+  if (location) {
+    query += ' AND location = ?';
+    queryParams.push(location);
   }
 
  

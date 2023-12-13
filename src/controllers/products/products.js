@@ -49,14 +49,15 @@ import Product from '../../models/products/selectProduct.js';
     //  BUSCADOR por body quizas mejor por params ... va bien 
     const searchProducts = async (req, res, next) => {
       try {
-        const { name, category, seller, price, location } = req.body;
-        console.log('Datos de búsqueda:', { name, category, seller, price });
+        const { name, category, sellerId, price, location } = req.body;
+        console.log('Datos de búsqueda:', { name, category, sellerId, price,location });
     
         const searchParams = {
           name,
           category,
-          seller,
+          sellerId,
           price,
+          location
         
         };
     
