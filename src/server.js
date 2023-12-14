@@ -13,12 +13,15 @@ import {
 } from "./controllers/products/index.js";
 import { authenticateToken } from "./middlewares/index.js";
 import { handleError } from "./middlewares/index.js";
-import { updateUser } from "./controllers/users/updateUser.js";
+import updateUserController from "./controllers/users/profile.js";
+import fileUpload from "express-fileupload";
+
 const app = express();
 
 useDb();
 
 app.use(express.json());
+app.use(fileUpload({ createParentPath: true }));
 
 app.post("/register", register);
 
@@ -26,19 +29,25 @@ app.post("/verify", verify);
 
 app.post("/login", login);
 
+// modificar usuario
+app.put("/profile", authenticateToken, updateUserController);
+
 //
+//Usuario anonimo vea todos los productos
 app.get("/products", controllerGetAllProducts);
+
+//Usuarioo vea sus productos
 app.get("/products/user/:userId", controllerGetProductsByUserId);
 
 app.post("/products/search", controllerSearchProducts);
 
 app.use(handleError);
-// id seller a mano:  product sin problema
-app.post("/products", controllerCreateProduct);
+
 //vincular id s producto solo pueden darlo de alta
-app.post("/products/user", authenticateToken, controllerCreateProductId);
-// modificar usuario
-app.put("/profile", updateUser);
+app.post("/products/", authenticateToken, controllerCreateProductId);
+
+// Modificar producto
+app.post("/products:productId")
 
 app.listen(PORT, () => {
   console.log(`SERVIDOR ACTIVO ${PORT}`);
