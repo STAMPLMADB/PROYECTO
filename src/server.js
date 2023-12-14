@@ -5,12 +5,12 @@ import { register } from "./controllers/users/register.js";
 import verify from "./controllers/users/verify.js";
 import login from "./controllers/users/login.js";
 import {
-  getAllProducts,
-  createProduct,
-  createProductId,
-  getProductsByUserId,
-  searchProducts,
-} from "./controllers/products/products.js";
+  controllerGetAllProducts,
+  controllerCreateProduct,
+  controllerCreateProductId,
+  controllerGetProductsByUserId,
+  controllerSearchProducts,
+} from "./controllers/products/index.js";
 import { authenticateToken } from "./middlewares/index.js";
 import { handleError } from "./middlewares/index.js";
 import updateUserController from "./controllers/users/profile.js";
@@ -29,21 +29,25 @@ app.post("/verify", verify);
 
 app.post("/login", login);
 
-//
-app.get("/products", getAllProducts);
-app.get("/products/user/:userId", getProductsByUserId);
+// modificar usuario
+app.put("/profile", authenticateToken, updateUserController);
 
-app.post("/products/search", searchProducts);
+//
+//Usuario anonimo vea todos los productos
+app.get("/products", controllerGetAllProducts);
+
+//Usuarioo vea sus productos
+app.get("/products/user/:userId", controllerGetProductsByUserId);
+
+app.post("/products/search", controllerSearchProducts);
 
 app.use(handleError);
-// id seller a mano:  product sin problema
-//app.post("/products", createProduct);
-//********************//
+
 //vincular id s producto solo pueden darlo de alta
-app.post("/products", authenticateToken, createProductId);
-// modificar usuario
+app.post("/products/", authenticateToken, controllerCreateProductId);
+
+// Modificar producto
 app.post("/products:productId")
-app.put("/profile", authenticateToken, updateUserController);
 
 app.listen(PORT, () => {
   console.log(`SERVIDOR ACTIVO ${PORT}`);
