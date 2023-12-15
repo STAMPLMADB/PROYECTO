@@ -15,7 +15,7 @@ const login = async (req, res, next) => {
     const joiPassword = Joi.extend(joiPasswordExtendCore);
     const schema = Joi.object().keys({
       email: Joi.string().email().required(),
-      password: joiPassword.string().min(8).minOfUppercase(1).minOfSpecialCharacters(1).required()
+      password: joiPassword.string().required()
     });
 
     const validation = schema.validate(req.body);

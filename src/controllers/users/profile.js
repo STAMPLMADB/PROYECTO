@@ -39,18 +39,11 @@ if (validation.error){
       userDataToUpdate.biography = biography;
     }
     
+
     const file = req.files.avatar;
-    //const timestamp = Date.now();
-    //const date = new Date(timestamp);
-    //const date = new Date(timestamp);
     const finalFileName = Date.now() + "-" + file.name;
     file.mv(`./uploads/${finalFileName}`);
-    // res.status(200).json({
-    //   nombre: file.name,
-    //   tamaño: file.size,
-    //   tipo: file.mimetype,
-    // });
-
+    
     
     if (req.files) {
       userDataToUpdate.avatarURL = finalFileName;
