@@ -13,10 +13,10 @@ const controllerCreateProductId = async (req, res, next) => {
     const schema = Joi.object().keys({
       name: Joi.string().min(1).max(24).required(),
       category: Joi.string().valid(...allowedCategories).required(),
-      price: Joi.number().required(),
-      location: Joi.string().min(5).required(),
-      imageURL: Joi.string().uri().min().required(),
-      description: Joi.string().min(5).required()
+      price: Joi.number().min(0).required(),
+      location: Joi.string().required(),
+      imageURL: Joi.string().uri().required(),
+      description: Joi.string().required()
     });
     
     const validation = schema.validate(req.body);
