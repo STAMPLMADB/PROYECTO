@@ -2,12 +2,28 @@ import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import { sendMailUtil } from "../../utils/index.js";
 import {selectUserByEmail, insertUser} from "../../models/users/index.js"
+import Joi from "joi";
+import { joiPasswordExtendCore } from "joi-password";
 
 const register = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
     const userWithSameEmail = await selectUserByEmail(email);
+    
+// JOIIII
+    const joiPassword = Joi.extend(joiPasswordExtendCore);
+    const schema = Joi.object().keys({
+      name: Joi.string().min(1).max(24).required(),
+      email: Joi.string().email().required(),
+      password: joiPassword.string().min(8).minOfUppercase(1).minOfSpecialCharacters(1).required()
+    });
+    
+    const validation = schema.validate(req.body);
+
+    if (validation.error){
+      return res.send(validation.error.message);
+    };
 
     if (userWithSameEmail) {
       console.error("Ya existe un usuario con este email", 400);
@@ -35,7 +51,5 @@ const register = async (req, res, next) => {
     next(error);
   }
 };
-
-
 
 export { register };

@@ -2,11 +2,27 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {selectUserByEmail} from "../../models/users/index.js";
 import { generateError } from "../../utils/index.js";
+import Joi from "joi";
+import { joiPasswordExtendCore } from "joi-password";
+
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
     const userDb = await selectUserByEmail(email);
+
+    // JOIIIIIIII
+    const joiPassword = Joi.extend(joiPasswordExtendCore);
+    const schema = Joi.object().keys({
+      email: Joi.string().email().required(),
+      password: joiPassword.string().min(8).minOfUppercase(1).minOfSpecialCharacters(1).required()
+    });
+
+    const validation = schema.validate(req.body);
+
+    if (validation.error){
+      return res.send(validation.error.message);
+    };
 
     if (!userDb) {
       generateError("El email o la contraseña son incorrectos", 400);
@@ -31,7 +47,7 @@ const login = async (req, res, next) => {
       expiresIn: "7d",
     });
     console.log(token);
-    res.send({ message: "Login correcto", data: token  });
+    res.send({ message: "Login correcto", token: token  });
   } catch (error) {
     next(error);
   }

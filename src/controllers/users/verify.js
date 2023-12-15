@@ -1,8 +1,21 @@
 import pool from "../../db/pool.js";
+import Joi from "joi";
 
 const verify = async (req, res, next) => {
   try {
     const { email, verificationCode } = req.body;
+
+    // JOIIII
+    const schema = Joi.object().keys({
+      email: Joi.string().email().required(),
+      verificationCode: Joi.string().required()
+    });
+    
+    const validation = schema.validate(req.body);
+
+    if (validation.error){
+      return res.send(validation.error.message);
+    };
 
     // Busca al usuario en la base de datos por correo electrónico y código de verificación
     const user = await getUserByVerificationCode(email, verificationCode);

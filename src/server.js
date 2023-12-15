@@ -6,7 +6,7 @@ import verify from "./controllers/users/verify.js";
 import login from "./controllers/users/login.js";
 import {
   controllerGetAllProducts,
-  controllerCreateProduct,
+  // controllerCreateProduct,
   controllerCreateProductId,
   controllerGetProductsByUserId,
   controllerSearchProducts,
@@ -44,7 +44,7 @@ app.post("/products/search", controllerSearchProducts);
 app.use(handleError);
 
 //vincular id s producto solo pueden darlo de alta
-app.post("/products/", authenticateToken, controllerCreateProductId);
+app.post("/products/create", authenticateToken, controllerCreateProductId);
 
 // Modificar producto
 app.post("/products:productId")

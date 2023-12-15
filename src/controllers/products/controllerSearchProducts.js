@@ -1,4 +1,5 @@
 import { searchProducts } from "../../models/products/index.js";
+import Joi from "joi";
 
 //  BUSCADOR por body quizas mejor por params ... va bien
 const controllerSearchProducts = async (req, res, next) => {
@@ -11,6 +12,23 @@ const controllerSearchProducts = async (req, res, next) => {
       price,
       location,
     });
+
+// pendiente de ver si necesita JOI
+//JOIII
+const allowedCategories = ['consola', 'ordenador', 'radio', 'televisor', 'movil']
+const schema = Joi.object().keys({
+  name: Joi.string().min(1).max(24),
+  category: Joi.string().valid(allowedCategories),
+  price: Joi.number().integer().positive(),
+  location: Joi.string().min(5),
+});
+
+const validation = schema.validate(req.body);
+
+if (validation.error){
+  res.send(validation.error.message);
+};
+
 
     const searchParams = {
       name,

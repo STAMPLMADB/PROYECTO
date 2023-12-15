@@ -1,11 +1,28 @@
 import bcrypt from "bcrypt";
 import updateUser from "../../models/users/updateUser.js";
+import Joi from "joi";
+import { joiPasswordExtendCore } from "joi-password";
 
 const updateUserController = async (req, res, next) => {
   try {
     const { id } = req.user; // Obtiene el ID del usuario del token
     const { name, password, biography } = req.body;
     //const { avatarURL } = req.files;
+    
+// pendiente de ver si necesita JOI
+const joiPassword = Joi.extend(joiPasswordExtendCore);
+const schema = Joi.object().keys({
+  name: Joi.string().min(1).max(24),
+  password: joiPassword.string().min(8).minOfUppercase(1).minOfSpecialCharacters(1),
+  biography: Joi.string().min(5),
+});
+
+const validation = schema.validate(req.body);
+
+if (validation.error){
+  return res.send(validation.error.message);
+};
+
 
     const userDataToUpdate = {};
 
