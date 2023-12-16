@@ -11,7 +11,7 @@ const register = async (req, res, next) => {
 
     const userWithSameEmail = await selectUserByEmail(email);
     
-// JOIIII
+// JOI
     const joiPassword = Joi.extend(joiPasswordExtendCore);
     const schema = Joi.object().keys({
       name: Joi.string().min(1).max(24).required(),

@@ -1,23 +1,18 @@
 import Joi from "joi";
-import createReservation from "../../models/reserva/createReserva.js";
+import createReservation from "../../models/reservation/createReservation.js";
 import sendMailUtil from "../../utils/sendMailUtil.js"; // Importar la función sendMailUtil
 import { v4 as uuidv4 } from "uuid";
 import pool from "../../db/pool.js"; // Asegúrate de importar tu pool de conexión a la base de datos
 
-const controllerCreateReservation = async (req, res, next) => {
+const controllerReservation = async (req, res, next) => {
   try {
     const { productId } = req.params;
     const { reservationLocation, status, review } = req.body;
-    const reservationDate = new Date()
-      .toISOString()
-      .slice(0, 19)
-      .replace("T", " ");
+    const reservationDate = new Date().toISOString().slice(0, 19).replace("T", " ");
 
     const schema = Joi.object().keys({
       reservationLocation: Joi.string().required(),
-      status: Joi.string()
-        .valid("pendiente", "en proceso", "finalizada")
-        .required(),
+      status: Joi.string().valid("pendiente", "en proceso", "finalizada").required(),
       review: Joi.string().valid("1", "2", "3", "4", "5").required(),
     });
 
@@ -81,4 +76,4 @@ const controllerCreateReservation = async (req, res, next) => {
   }
 };
 
-export default controllerCreateReservation;
+export default controllerReservation;

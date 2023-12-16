@@ -1,8 +1,5 @@
 //importamos nuestras dependencias
-import { v4 as uuidv4 } from "uuid";
-//import { verificationCode } from "../controllers/users/register.js";
 import nodemailer from "nodemailer";
-
 import { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } from "../../env.js";
 
 //Preparando el transporte de nuestro correo
@@ -17,12 +14,11 @@ const transport = nodemailer.createTransport({
 });
 
 //efectuar el envío del correo al usuario
-//aquí lo que está dentro del parentesis son parametros
+//aquí lo que está dentro del parentesis son parámetros
 
 const reservationEmail = async (email, link) => {
   // envia el mail con el debido objeto de transporte
   try {
-
     const mailOptions = {
       from: SMTP_USER,
       to: email,
@@ -31,11 +27,10 @@ const reservationEmail = async (email, link) => {
     };
     await transport.sendMail(mailOptions);
 
-   
-
+    return link;
   } catch (error) {
     console.error("Ufff ha ocurrido un error en el envío!!", error);
   }
 };
 
-export default sendMailUtil;
+export default reservationEmail;

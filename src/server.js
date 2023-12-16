@@ -6,7 +6,6 @@ import verify from "./controllers/users/verify.js";
 import login from "./controllers/users/login.js";
 import {
   controllerGetAllProducts,
-  // controllerCreateProduct,
   controllerCreateProductId,
   controllerGetProductsByUserId,
   controllerSearchProducts,
@@ -15,6 +14,7 @@ import { authenticateToken } from "./middlewares/index.js";
 import { handleError } from "./middlewares/index.js";
 import updateUserController from "./controllers/users/profile.js";
 import fileUpload from "express-fileupload";
+import controllerReservation from "./controllers/reservation/controllerReservation.js";
 
 const app = express();
 
@@ -47,7 +47,10 @@ app.use(handleError);
 app.post("/products/create", authenticateToken, controllerCreateProductId);
 
 // Modificar producto
-app.post("/products:productId")
+app.post("/products:productId");
+
+//Enviar correo para reservar producto
+app.post("/reservation", controllerReservation);
 
 app.listen(PORT, () => {
   console.log(`SERVIDOR ACTIVO ${PORT}`);
