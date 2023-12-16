@@ -1,18 +1,22 @@
 import Joi from "joi";
 import createReservation from "../../models/reservation/createReservation.js";
-import sendMailUtil from "../../utils/sendMailUtil.js";
-import { v4 as uuidv4 } from "uuid";
+import { reservationEmail } from "../../utils/index.js";
 
 const controllerReservation = async (req, res, next) => {
   try {
     const productId = req.query.productId; // Obtener productId de los parámetros de la consulta
     const { reservationLocation, status } = req.body;
-    const reservationDate = new Date().toISOString().slice(0, 19).replace("T", " ");
+    const reservationDate = new Date()
+      .toISOString()
+      .slice(0, 19)
+      .replace("T", " ");
 
     const schema = Joi.object().keys({
       reservationLocation: Joi.string().required(),
-      status: Joi.string().valid("pendiente", "en proceso", "finalizada").required(),
-    //  review: Joi.string().valid("1", "2", "3", "4", "5").required(),
+      status: Joi.string()
+        .valid("pendiente", "en proceso", "finalizada")
+        .required(),
+      //  review: Joi.string().valid("1", "2", "3", "4", "5").required(),
     });
 
     const validation = schema.validate({ reservationLocation, status });
@@ -28,17 +32,16 @@ const controllerReservation = async (req, res, next) => {
         reservationLocation,
         reservationDate,
         status,
-     
       },
       buyerId,
       productId // Pasar productId como parámetro
     );
 
-    const verificationCode = uuidv4();
-    const mailContent = `Se ha creado una reserva para uno de tus productos. ¡Revisa tu cuenta!`;
-    await sendMailUtil(email, verificationCode, mailContent);
-
-    res.status(201).json({ id: reservationId, message: "Reserva creada exitosamente" });
+    await reservationEmail(email);
+    // console.log(email);
+    res
+      .status(201)
+      .json({ id: reservationId, message: "Reserva creada exitosamente" });
   } catch (error) {
     next(error);
   }

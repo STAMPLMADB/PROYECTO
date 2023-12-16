@@ -52,10 +52,10 @@ app.post("/products/create", authenticateToken, controllerCreateProductId);
 app.post("/products:productId");
 
 //Enviar correo para reservar producto
-app.post("/reservation/:id", authenticateToken ,controllerReservation);
-app.post("/reservation:id", authenticateToken ,controllerReservation);
-app.get("/reservation:id", authenticateToken ,controllerReservation);
-app.get("/reservation/:id", authenticateToken ,controllerReservation);
+// app.post("/reservation/:id", authenticateToken ,controllerReservation);
+// app.post("/reservation:id", authenticateToken ,controllerReservation);
+// app.get("/reservation:id", authenticateToken ,controllerReservation);
+// app.get("/reservation/:id", authenticateToken ,controllerReservation);
 app.post("/reservation", authenticateToken ,controllerReservation);
 
 
