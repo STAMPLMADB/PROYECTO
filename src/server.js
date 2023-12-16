@@ -14,7 +14,7 @@ import { authenticateToken } from "./middlewares/index.js";
 import { handleError } from "./middlewares/index.js";
 import updateUserController from "./controllers/users/profile.js";
 import fileUpload from "express-fileupload";
-import controllerReservation from "./controllers/reservation/controllerReservation.js";
+import createReservation from "./controllers/reservation/controllerReservation.js"
 
 const app = express();
 
@@ -50,7 +50,8 @@ app.post("/products/create", authenticateToken, controllerCreateProductId);
 app.post("/products:productId");
 
 //Enviar correo para reservar producto
-app.post("/reservation", controllerReservation);
+app.post("/reservation:productId", authenticateToken ,createReservation);
+
 
 app.listen(PORT, () => {
   console.log(`SERVIDOR ACTIVO ${PORT}`);
