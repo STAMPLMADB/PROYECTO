@@ -1,11 +1,11 @@
 import Joi from "joi";
 import createReservation from "../../models/reservation/createReservation.js";
-import sendMailUtil from "../../utils/sendMailUtil.js"; // Importar la función sendMailUtil
+import sendMailUtil from "../../utils/sendMailUtil.js";
 import { v4 as uuidv4 } from "uuid";
 
 const controllerReservation = async (req, res, next) => {
   try {
-    const  productId = req.params;
+    const productId = req.query.productId; // Obtener productId de los parámetros de la consulta
     const { reservationLocation, status, review } = req.body;
     const reservationDate = new Date().toISOString().slice(0, 19).replace("T", " ");
 
@@ -31,7 +31,7 @@ const controllerReservation = async (req, res, next) => {
         review,
       },
       buyerId,
-      productId
+      productId // Pasar productId como parámetro
     );
 
     const verificationCode = uuidv4();
@@ -43,4 +43,5 @@ const controllerReservation = async (req, res, next) => {
     next(error);
   }
 };
+
 export default controllerReservation;

@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors"
 import { PORT } from "../env.js";
 import useDb from "./db/useDb.js";
 import { register } from "./controllers/users/register.js";
@@ -14,11 +15,12 @@ import { authenticateToken } from "./middlewares/index.js";
 import { handleError } from "./middlewares/index.js";
 import updateUserController from "./controllers/users/profile.js";
 import fileUpload from "express-fileupload";
-import createReservation from "./controllers/reservation/controllerReservation.js"
+import controllerReservation from "./controllers/reservation/controllerReservation.js"
 
 const app = express();
 
 useDb();
+app.use(cors())
 
 app.use(express.json());
 app.use(fileUpload({ createParentPath: true }));
@@ -50,7 +52,11 @@ app.post("/products/create", authenticateToken, controllerCreateProductId);
 app.post("/products:productId");
 
 //Enviar correo para reservar producto
-app.post("/reservation:productId", authenticateToken ,createReservation);
+app.post("/reservation/:id", authenticateToken ,controllerReservation);
+app.post("/reservation:id", authenticateToken ,controllerReservation);
+app.get("/reservation:id", authenticateToken ,controllerReservation);
+app.get("/reservation/:id", authenticateToken ,controllerReservation);
+app.post("/reservation", authenticateToken ,controllerReservation);
 
 
 app.listen(PORT, () => {

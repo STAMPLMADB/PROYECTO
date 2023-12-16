@@ -1,5 +1,3 @@
-
-
 import pool from "../../db/pool.js";
 
 const createReservation = async (reservationData, buyerId, productId) => {
@@ -26,30 +24,29 @@ const createReservation = async (reservationData, buyerId, productId) => {
 
     // Consulta para obtener el correo electrónico del vendedor
     const selectQuery = `
-    SELECT p.sellerId, u.email, r.*
-    FROM products p
-    INNER JOIN users u ON p.sellerId = u.id
-    INNER JOIN reservation r ON p.id = r.productId
-    WHERE r.productId = ?`; // Modificar para usar r.productId en lugar de p.id
+      SELECT r.*, u.email 
+      FROM reservation r
+      INNER JOIN products p ON p.id = r.productId
+      INNER JOIN users u ON p.sellerId = u.id
+      WHERE r.id = ?`;
 
-    const email = await pool.query(selectQuery, [productId]);
-    console.log(productId);
-    if (!email || !email.length) {
+    const emailResult = await pool.query(selectQuery, [reservationId]);
+
+    if (!emailResult || !emailResult.length) {
       throw new Error('Correo electrónico del vendedor no encontrado');
     }
 
-    // Devuelve el correo electrónico del vendedor y el ID de la reserva
+    // Seleccionar el correo electrónico del vendedor
+    const email = emailResult[0].email;
+
+    // Devolver el ID de la reserva y el correo electrónico del vendedor
     return {
       reservationId,
-      email: email[0].email,
+      email,
     };
-
   } catch (error) {
     throw new Error(`Error al crear la reserva: ${error.message}`);
   }
 };
 
-
 export default createReservation;
-
-
