@@ -1,14 +1,11 @@
-import { deleteProduct } from "../../models/products/index.js";
-import Joi from "joi";
-import { v4 as uuidv4 } from "uuid";
-
+import { deleteProduct } from "../../models/products/index.js"
 
 const controllerDeleteProduct = async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const sellerId = req.user.id; // user.id  no lo tengo claro
-    const productId = await deleteProduct(
-      id,
+    const productId = req.query.id;
+    const sellerId = req.user.id;
+    await deleteProduct(
+      productId,
       sellerId
     );
     res

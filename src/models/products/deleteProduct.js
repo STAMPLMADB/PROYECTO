@@ -1,14 +1,17 @@
 import pool from "../../db/pool.js";
 
-const deleteProduct = async (productData) => {
+const deleteProduct = async (productId, sellerId) => {
   try {
-    const { id } = productData;
-
     const query =
-      "DELETE FROM products WHERE id = ?";
+      "DELETE FROM products WHERE id = ? AND sellerId = ?";
     const [result] = await pool.query(query, [
-      id
+      productId,
+      sellerId
     ]);
+
+    if (productId != products.id){
+        console.log("Producto Equivocado");
+    };
 
     return result.insertId;
   } catch (error) {
