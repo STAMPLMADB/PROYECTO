@@ -1,16 +1,15 @@
 import { deleteProduct } from "../../models/products/index.js"
 
+
+
 const controllerDeleteProduct = async (req, res, next) => {
   try {
-    const productId = req.query.id;
+    const id = req.query.id;
+    console.log(id);
     const sellerId = req.user.id;
-    await deleteProduct(
-      productId,
-      sellerId
-    );
-    res
-      .status(201)
-      .json({ id: productId, message: "Producto eliminado exitosamente" });
+   await deleteProduct( id, sellerId );
+    res.status(201)
+      res.json({ id: id, sellerId:sellerId, message: "Producto eliminado exitosamente" });
   } catch (error) {
     next(error);
   }
