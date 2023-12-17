@@ -16,6 +16,8 @@ import { handleError } from "./middlewares/index.js";
 import updateUserController from "./controllers/users/profile.js";
 import fileUpload from "express-fileupload";
 import controllerReservation from "./controllers/reservation/controllerReservation.js"
+import controllerStatusReservation from "./controllers/reservation/controllerStatusReservation.js";
+import controllerPurchaseConfirmation from "./controllers/reservation/controllerPurchaseConfirmation.js";
 
 const app = express();
 
@@ -58,6 +60,12 @@ app.post("/products:productId");
 // app.get("/reservation/:id", authenticateToken ,controllerReservation);
 app.post("/reservation", authenticateToken ,controllerReservation);
 
+
+//Verificar reserva? - Cambiar status de pendiente --> en proceso
+app.post('/reservation-update',authenticateToken,controllerStatusReservation)
+
+//COMPRA HECHA MODELFOKEL
+app.patch('/products/purchaseConfirmation',authenticateToken, controllerPurchaseConfirmation)
 
 app.listen(PORT, () => {
   console.log(`SERVIDOR ACTIVO ${PORT}`);

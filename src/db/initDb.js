@@ -39,9 +39,10 @@ export const initDb = async () => {
         CREATE TABLE IF NOT EXISTS reservation (
             id INT PRIMARY KEY AUTO_INCREMENT,
             buyOrder TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            reservationLocation VARCHAR(100) NOT NULL,
-            reservationDate DATETIME NOT NULL,
-            status ENUM('pendiente', 'en proceso', 'finalizada'),
+            reservationLocation VARCHAR(100),
+            reservationDate DATETIME,
+            status ENUM('pendiente', 'en proceso', 'finalizada') NOT NULL,
+            reservation_token VARCHAR(36),
             review ENUM('1', '2', '3', '4', '5'),
             buyerId INT,
             FOREIGN KEY (buyerId)

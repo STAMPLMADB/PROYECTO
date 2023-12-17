@@ -1,20 +1,18 @@
 import pool from "../../db/pool.js";
 
-const createReservation = async (reservationData, buyerId, productId) => {
+const createReservation = async (reservationData, buyerId, productId,reservationToken) => {
   try {
-    const { reservationLocation, reservationDate, status, review } =
+    const { buyOrder } =
       reservationData;
 
     // Consulta para insertar la reserva
     const insertQuery =
-      "INSERT INTO reservation (reservationLocation, reservationDate, status, review, buyerId, productId) VALUES (?, ?, ?, ?, ?, ?)";
+      "INSERT INTO reservation (buyOrder, buyerId, productId, reservation_token) VALUES (?, ?, ?, ?)";
     const [result] = await pool.query(insertQuery, [
-      reservationLocation,
-      reservationDate,
-      status,
-      review,
+      buyOrder,
       buyerId,
       productId,
+      reservationToken
     ]);
 
     if (!result || !result.insertId) {
@@ -41,6 +39,7 @@ const createReservation = async (reservationData, buyerId, productId) => {
     const email = patata[0].email;
     
     console.log(email);
+    console.log(reservationId);
     // Devolver el ID de la reserva y el correo electrónico del vendedor
     return {
       reservationId,

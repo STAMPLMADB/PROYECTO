@@ -45,7 +45,7 @@ const register = async (req, res, next) => {
     res.status(201).send({
       message:
         "Registro completado con éxito. Te hemos enviado un correo para que verifiques tu registro",
-      data: { id: insertId, nombre: name, email, verificationCode },
+      data: { id: insertId, nombre: name, email },
     });
   } catch (error) {
     next(error);
