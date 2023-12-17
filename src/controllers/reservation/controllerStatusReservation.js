@@ -11,9 +11,7 @@ const controllerStatusReservation = async (req, res, next) => {
         message: "Se ha cambiado el status a en proceso correctamente",
       });
     } else {
-      res.status(400).send({
-        message: "Ha ocurrido un error",
-      });
+      generateError("Ha ocurrido un error", 400);
     }
   } catch (error) {
     next(error);

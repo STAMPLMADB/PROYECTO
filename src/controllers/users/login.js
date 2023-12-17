@@ -11,7 +11,7 @@ const login = async (req, res, next) => {
 
     const userDb = await selectUserByEmail(email);
 
-    // JOIIIIIIII
+    
     const joiPassword = Joi.extend(joiPasswordExtendCore);
     const schema = Joi.object().keys({
       email: Joi.string().email().required(),
@@ -34,13 +34,12 @@ const login = async (req, res, next) => {
       generateError("El email o la contraseña son incorrectos", 400);
     }
 
-    // Revisar cómo se obtiene userDb.isEmailValidated de la base de datos
+    
 
     if (userDb.isEmailValidated === 0) {
       generateError("La cuenta no ha sido verificada, revisa tu email", 400);
     }
 
-    // Si todos los controles son exitosos, puedes generar el token JWT aquí
 
     const jwtPayload = { id: userDb.id };
     const token = jwt.sign(jwtPayload, process.env.TOKEN_SECRET, {

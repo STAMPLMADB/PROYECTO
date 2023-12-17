@@ -23,9 +23,9 @@ router.post("/products/search", controllerSearchProducts);
 router.post("/products/create", authenticateToken, controllerCreateProductId);
 
 // Modificar producto
-router.put("/products", authenticateToken,controllerModifyProduct);
+router.put("/products/:productid", authenticateToken,controllerModifyProduct);
 
 //Eliminar producto
-router.delete("/products", authenticateToken, controllerDeleteProduct);
+router.delete("/products/:id", authenticateToken, controllerDeleteProduct);
 
 export default router;

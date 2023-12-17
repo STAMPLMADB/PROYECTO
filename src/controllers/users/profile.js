@@ -48,10 +48,6 @@ if (validation.error){
     if (req.files) {
       userDataToUpdate.avatarURL = finalFileName;
     }
-
-    
-
-
     await updateUser({ id, ...userDataToUpdate });
 
     if (updateUser) {

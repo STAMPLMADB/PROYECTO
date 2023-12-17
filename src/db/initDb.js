@@ -17,8 +17,6 @@ export const initDb = async () => {
             biography VARCHAR(255),
             verification_code VARCHAR(36),
             isEmailValidated BOOLEAN NOT NULL DEFAULT FALSE,
-            isEmailPublic BOOLEAN NOT NULL DEFAULT TRUE,
-            isEnabled BOOLEAN NOT NULL DEFAULT TRUE
         );`);
     
         await pool.query(`

@@ -4,6 +4,7 @@ import createProductId from "./createProductId.js";
 import searchProducts from "./searchProducts.js";
 import modifyProduct from "./modifyProduct.js";
 import deleteProduct from "./deleteProduct.js";
+import selectProductById from "./selectProductById.js";
 
 export {
   getAllProducts,
@@ -11,5 +12,6 @@ export {
   createProductId,
   searchProducts,
   modifyProduct,
-  deleteProduct
+  deleteProduct,
+  selectProductById,
 };

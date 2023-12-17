@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
-import { sendMailUtil } from "../../utils/index.js";
+import { generateError, sendMailUtil } from "../../utils/index.js";
 import {selectUserByEmail, insertUser} from "../../models/users/index.js"
 import Joi from "joi";
 import { joiPasswordExtendCore } from "joi-password";
@@ -26,8 +26,7 @@ const register = async (req, res, next) => {
     };
 
     if (userWithSameEmail) {
-      console.error("Ya existe un usuario con este email", 400);
-      return res.status(400).send("Ya existe un usuario con este email");
+      generateError("Ya existe un usuario con este email",400);
     }
 
     const verificationCode = uuidv4();

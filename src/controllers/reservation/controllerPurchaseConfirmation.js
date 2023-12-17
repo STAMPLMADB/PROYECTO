@@ -1,6 +1,10 @@
 import pool from "../../db/pool.js";
 import Joi from "joi";
 import purchaseConfirmationEmail from "../../utils/purchaseConfirmationEmail.js";
+import {
+  getReservationById,
+  purchaseConfirmation,
+} from "../../models/reservation/index.js";
 
 const controllerPurchaseConfirmation = async (req, res, next) => {
   try {
@@ -59,25 +63,6 @@ const controllerPurchaseConfirmation = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
-
-const getReservationById = async (reservationId) => {
-  const [[reservation]] = await pool.query(
-    "SELECT * FROM reservation WHERE id = ?",
-    [reservationId]
-  );
-  return reservation;
-};
-
-const purchaseConfirmation = async (
-  reservationLocation,
-  reservationDate,
-  reservationId
-) => {
-  await pool.query(
-    "UPDATE reservation SET reservationLocation = ? , reservationDate = ?  WHERE id = ? ",
-    [reservationLocation, reservationDate, reservationId]
-  );
 };
 
 export default controllerPurchaseConfirmation;
