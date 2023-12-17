@@ -5,6 +5,8 @@ import {
   controllerGetProductsByUserId,
   controllerGetAllProducts,
   controllerCreateProductId,
+  controllerModifyProduct,
+  controllerDeleteProduct
 } from "../controllers/products/index.js";
 
 const router = express.Router();
@@ -21,6 +23,9 @@ router.post("/products/search", controllerSearchProducts);
 router.post("/products/create", authenticateToken, controllerCreateProductId);
 
 // Modificar producto
-router.post("/products:productId");
+router.put("/products", authenticateToken,controllerModifyProduct);
+
+//Eliminar producto
+router.delete("/products", authenticateToken, controllerDeleteProduct);
 
 export default router;
