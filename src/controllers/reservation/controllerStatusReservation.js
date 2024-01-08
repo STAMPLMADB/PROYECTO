@@ -1,4 +1,10 @@
-import pool from "../../db/pool.js";
+
+import { generateError } from "../../utils/index.js";
+import {
+  getReservationByToken,
+  updateReservationStatus,
+} from "../../models/reservation/index.js";
+
 const controllerStatusReservation = async (req, res, next) => {
   try {
     const { reservationToken } = req.body;
@@ -16,21 +22,6 @@ const controllerStatusReservation = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
-
-const getReservationByToken = async (reservationToken) => {
-  const [[reservation]] = await pool.query(
-    "SELECT * FROM reservation WHERE reservation_token = ?",
-    [reservationToken]
-  );
-  return reservation;
-};
-
-const updateReservationStatus = async (reservationToken) => {
-  await pool.query(
-    "UPDATE reservation SET status = 'en proceso' WHERE reservation_token = ? ",
-    [reservationToken]
-  );
 };
 
 export default controllerStatusReservation;

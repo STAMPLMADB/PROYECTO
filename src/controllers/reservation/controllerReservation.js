@@ -6,7 +6,8 @@ import { reservationEmail } from "../../utils/index.js";
 const controllerReservation = async (req, res, next) => {
   try {
     const productId = req.query.productId; // Obtener productId de los parámetros de la consulta
-    const buyOrder = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+    const buyOrder = new Date();
 
     const buyerId = req.user.id;
 

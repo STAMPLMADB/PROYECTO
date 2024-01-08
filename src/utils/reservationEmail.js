@@ -23,10 +23,9 @@ const reservationEmail = async (email, reservationId) => {
       from: SMTP_USER,
       to: email,
       subject: "Propuesta de compra",
-      text: `¡Felicidades un usuario se ha interesado por tu producto! Pincha aquí para concertar cita http://localhost:3001/reservation-update?reservationId=${reservationId}`,
+      text: `¡Felicidades un usuario se ha interesado por tu producto! Pincha aquí para aceptar la propuesta de compra http://localhost:3001/reservation-update?reservationId=${reservationId}`,
     };
     await transport.sendMail(mailOptions);
-    
   } catch (error) {
     console.error("Ufff ha ocurrido un error en el envío!!", error);
   }
