@@ -44,11 +44,10 @@ const controllerModifyProduct = async (req, res, next) => {
       productDataToUpdate.location = location;
     }
 
-    const file = req.files.avatar;
-    const finalFileName = Date.now() + "-" + file.name;
-    file.mv(`./uploads/${finalFileName}`);
-
-    if (req.files) {
+    if (req.files?.avatar) {
+      const file = req.files.avatar;
+      const finalFileName = Date.now() + "-" + file.name;
+      file.mv(`./uploads/${finalFileName}`);
       productDataToUpdate.imageURL = finalFileName;
     }
 
@@ -58,16 +57,10 @@ const controllerModifyProduct = async (req, res, next) => {
 
     await modifyProduct({ id, ...productDataToUpdate });
 
-    if (modifyProduct) {
-      return res.status(200).json({
-        message: "Producto actualizado correctamente",
-        data: { id, ...productDataToUpdate },
-      });
-    } else {
-      return res
-        .status(500)
-        .json({ message: "Error al actualizar los datos del producto" });
-    }
+    res.status(200).json({
+      message: "Producto actualizado correctamente",
+      data: { id, ...productDataToUpdate },
+    });
   } catch (error) {
     next(error);
   }

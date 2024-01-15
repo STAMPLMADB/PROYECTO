@@ -17,7 +17,7 @@ const verify = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      return res.send(validation.error.message);
+      generateError(validation.error.message, 400);
     }
 
     const user = await getUserByVerificationCode(verificationCode);

@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
-import { generateError, sendMailUtil } from "../../utils/index.js";
+import { generateError, sendVerificationMail } from "../../utils/index.js";
 import {selectUserByEmail, insertUser} from "../../models/users/index.js"
 import Joi from "joi";
 import { joiPasswordExtendCore } from "joi-password";
@@ -22,7 +22,7 @@ const register = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error){
-      return res.send(validation.error.message);
+      generateError(validation.error.message, 400);
     };
 
     if (userWithSameEmail) {
@@ -39,7 +39,7 @@ const register = async (req, res, next) => {
       verificationCode,
     });
 
-    await sendMailUtil(email, verificationCode);
+    await sendVerificationMail(email, verificationCode);
 
     res.status(201).send({
       message:

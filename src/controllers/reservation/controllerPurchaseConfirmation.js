@@ -1,6 +1,6 @@
 import pool from "../../db/pool.js";
 import Joi from "joi";
-import { purchaseConfirmationEmail } from "../../utils/index.js";
+import { generateError, purchaseConfirmationEmail } from "../../utils/index.js";
 import {
   getReservationById,
   purchaseConfirmation,
@@ -22,7 +22,7 @@ const controllerPurchaseConfirmation = async (req, res, next) => {
     });
 
     if (validation.error) {
-      return res.status(400).json({ error: validation.error.message });
+      generateError(400).json({ error: validation.error.message });
     }
 
     // Consulta para obtener el correo electrónico del vendedor

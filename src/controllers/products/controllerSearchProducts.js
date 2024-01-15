@@ -1,5 +1,6 @@
 import { searchProducts } from "../../models/products/index.js";
 import Joi from "joi";
+import generateError from "../../utils/generateError.js";
 
 //  BUSCADOR por body quizas mejor por params ... va bien
 const controllerSearchProducts = async (req, res, next) => {
@@ -26,7 +27,7 @@ const schema = Joi.object().keys({
 const validation = schema.validate(req.body);
 
 if (validation.error){
-  res.send(validation.error.message);
+  generateError(validation.error.message);
 };
 
 

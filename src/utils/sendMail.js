@@ -13,4 +13,14 @@ const transport = nodemailer.createTransport({
   },
 });
 
-export default transport;
+const sendMail = async (email, subject, text) => {
+  const mailOptions = {
+    from: SMTP_USER,
+    to: email,
+    subject,
+    text,
+  };
+  await transport.sendMail(mailOptions);
+};
+
+export default sendMail;

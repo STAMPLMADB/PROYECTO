@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import updateUser from "../../models/users/updateUser.js";
 import Joi from "joi";
 import { joiPasswordExtendCore } from "joi-password";
+import generateError from "../../utils/generateError.js";
 
 const profile = async (req, res, next) => {
   try {
@@ -20,7 +21,7 @@ const schema = Joi.object().keys({
 const validation = schema.validate(req.body);
 
 if (validation.error){
-  return res.send(validation.error.message);
+  generateError(validation.error.message);
 };
 
 

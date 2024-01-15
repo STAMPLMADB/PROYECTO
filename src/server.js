@@ -10,7 +10,7 @@ const app = express();
 
 useDb();
 app.use(cors());
-app.use(express.static);
+app.use(express.static("uploads"));
 app.use(express.json());
 app.use(fileUpload({ createParentPath: true }));
 app.use(routeProducts);

@@ -1,6 +1,7 @@
 import { createProductId } from "../../models/products/index.js";
 import Joi from "joi";
 import { v4 as uuidv4 } from "uuid";
+import generateError from "../../utils/generateError.js";
 
 // crear product engarzandolo con id user  //
 // token y rollos ??
@@ -35,7 +36,7 @@ const controllerCreateProductId = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      return res.send(validation.error.message);
+      generateError(validation.error.message);
     }
 
     const sellerId = req.user.id; // user.id  no lo tengo claro
