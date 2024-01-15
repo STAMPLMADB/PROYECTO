@@ -57,7 +57,7 @@ const controllerPurchaseConfirmation = async (req, res, next) => {
         reservationDate
       );
 
-      res.status(201).json({ message: " Compra confirmada con ecsito" });
+      res.status(201).json({ message: " Compra confirmada con éxito" });
     } else {
     }
   } catch (error) {

@@ -1,6 +1,10 @@
-## API retroshop - Realizado por Miguel Dario Garcia Quintas, Juan Gabriel Callejo Vidal, Luis Manuel Dominguez Brito, Marta Diéguez González Y Daniel Vazquez González.
+## API retroshop - Realizado por Miguel Dario Garcia Quintas, Juan Gabriel Callejo Vidal, Luis Manuel Dominguez Brito, Marta Diéguez González Y Daniel Vázquez González.
 
-API retroshop es una API para una plataforma de compra-venta en la que los usuarios tendrán la posibilidad de registrarse para poder publicar y/o vender productos. A continuación están las instrucciones para ejecutar la API.
+API retroshop es una API para una plataforma de compra-venta en la que los usuarios tendrán la posibilidad de registrarse para poder publicar y/o vender productos.
+
+La base de datos cuentas con tres 
+
+A continuación están las instrucciones para ejecutar la API.
 
 ## Base de datos
 
@@ -9,9 +13,9 @@ Crea un archivo .env con el archivo .env.example de referencia.
 
 1. Introducimos npm run initDB en la terminal para crear la Base de Datos. El código se ejecuta y acontinuación crea una base de datos con una tabla "users"
 
-A su vez se generaa otra tabla "reservation"
+A su vez se genera otra tabla "reservation"
 
-Y finalmente se genera la tablaa "products".
+Y finalmente se genera la tabla "products".
 
 En caso de que quieras resetear la base de datos, hemos creado un script dentro del package.json llamado "resetDb" el cual te ejecuta un reseteo de la base de datos.
 
@@ -28,18 +32,41 @@ Por users:
   Permite generar un usuario nuevo en la Base de Datos, y le envía un correo de verificación 
   al correo inscrito en la DB
 
+  Se requiere para el registro:
+   
+   1. name
+   2. email
+   3. hashedPasword
+   4. verificationCode
+
 - POST /verify
 
- Verifica el registro de la cuenta de la Base de Datos, empleamos el código del email 
-que nos llegó tras el registro para verificar
+  Verifica el registro de la cuenta de la Base de Datos, empleamos el código del email 
+  que nos llegó tras el registro para verificar
 
+  Se requiere para la verificación:
+   
+   1. email
+   2. verificationCode
+   
 - POST /login
 
-  Permite el acceso al usuario, empleando el email y constraseña
+  Permite el acceso al usuario a su cuenta
+
+  Se requiere para el login:
+   
+   1. email
+   2. password
 
 - PUT /profile
 
   Nos permite hacer modificaciones en los diferentes campos de nuestro usuario
+
+  Se requiere para actualizar:
+   
+   1. email
+   2. password
+   3. biography
 
 ///////////////////////////////////////////////////////////
 

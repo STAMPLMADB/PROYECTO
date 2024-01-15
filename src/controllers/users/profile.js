@@ -58,7 +58,10 @@ if (validation.error){
     } else {
       return res
         .status(500)
-        .json({ message: "Error al actualizar los datos del usuario" });
+        .json({ 
+         message: "Error al actualizar los datos del usuario",
+         error: updateUser.error
+       });
     }
   } catch (error) {
     next(error);

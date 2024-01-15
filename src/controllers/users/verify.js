@@ -7,9 +7,8 @@ import {
 
 const verify = async (req, res, next) => {
   try {
-    const { email, verificationCode } = req.body;
+    const { verificationCode } = req.body;
 
-  
     const schema = Joi.object().keys({
       email: Joi.string().email().required(),
       verificationCode: Joi.string().required(),
@@ -21,19 +20,20 @@ const verify = async (req, res, next) => {
       return res.send(validation.error.message);
     }
 
-    
-    const user = await getUserByVerificationCode(email, verificationCode);
+    const user = await getUserByVerificationCode(verificationCode);
 
-    if (user && user.verification_code === verificationCode) {
-      await updateVerificationStatus(email);
-
-      res.status(200).send({
-        message: "Verificación exitosa. Ahora puedes iniciar sesión.",
-      });
-    } else {
+    if (!user) {
       generateError("Código de verificación incorrecto.", 400);
     }
-  } catch (error) {
+
+    const status =  await updateVerificationStatus(email);
+
+      res
+        .status(200)
+        .send({
+          message: "Verificación exitosa. Ahora puedes iniciar sesión.",
+        });
+    } catch (error) {
     next(error);
   }
 };

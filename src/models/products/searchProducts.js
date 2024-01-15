@@ -27,7 +27,7 @@ const searchProducts = async ({ name, category, sellerId, price, location }) => 
   }
   if (location) {
     query += " AND location = ?";
-    queryParams.push(location);
+    queryParams.push(`%${location}%`);
   }
 
   try {

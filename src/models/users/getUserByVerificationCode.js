@@ -1,9 +1,9 @@
 import pool from "../../db/pool.js";
 
-const getUserByVerificationCode = async (email, verificationCode) => {
+const getUserByVerificationCode = async (verificationCode) => {
   const [[user]] = await pool.query(
     "SELECT * FROM users WHERE email = ? AND verification_code = ?",
-    [email, verificationCode]
+    [verificationCode]
   );
   return user;
 };

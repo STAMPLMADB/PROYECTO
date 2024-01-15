@@ -21,7 +21,7 @@ const controllerDeleteProduct = async (req, res, next) => {
     }
 
     await deleteProduct(id);
-    res.status(201);
+    res.status(200);
     res.json({
       id: id,
       message: "Producto eliminado exitosamente",

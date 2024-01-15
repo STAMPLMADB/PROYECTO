@@ -19,8 +19,8 @@ const allowedCategories = ['consola', 'ordenador', 'radio', 'televisor', 'movil'
 const schema = Joi.object().keys({
   name: Joi.string().min(1).max(24),
   category: Joi.string().valid(allowedCategories),
-  price: Joi.number().integer().positive(),
-  location: Joi.string().min(5),
+  price: Joi.number().integer().positive().min(1).max(1000000),
+  location: Joi.string(),
 });
 
 const validation = schema.validate(req.body);

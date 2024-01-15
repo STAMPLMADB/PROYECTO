@@ -1,22 +1,9 @@
-//importamos nuestras dependencias
-import nodemailer from "nodemailer";
-import { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } from "../../env.js";
-
-//Preparando el transporte de nuestro correo
-
-const transport = nodemailer.createTransport({
-  host: SMTP_HOST,
-  port: SMTP_PORT,
-  auth: {
-    user: SMTP_USER,
-    pass: SMTP_PASS,
-  },
-});
+import transport from "./sendMail";
 
 //efectuar el envío del correo al usuario
 //aquí lo que está dentro del parentesis son parámetros
 
-const sendMailUtil = async (email, verificationCode) => {
+const sendVerificationMail = async (email, verificationCode) => {
   // envia el mail con el debido objeto de transporte
   try {
     const mailOptions = {
@@ -34,4 +21,4 @@ const sendMailUtil = async (email, verificationCode) => {
   }
 };
 
-export default sendMailUtil;
+export default sendVerificationMail;

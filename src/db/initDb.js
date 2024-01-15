@@ -2,12 +2,12 @@ import pool from "./pool.js";
 import useDb from "./useDb.js";
 
 export const initDb = async () => {
-    try {
-        await pool.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME};`);
-        
-        await useDb();
+  try {
+    await pool.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME};`);
 
-        await pool.query(`
+    await useDb();
+
+    await pool.query(`
         CREATE TABLE IF NOT EXISTS users (
             id INT PRIMARY KEY AUTO_INCREMENT,
             name VARCHAR(50) NOT NULL,
@@ -16,10 +16,10 @@ export const initDb = async () => {
             avatarURL VARCHAR(255),
             biography VARCHAR(255),
             verification_code VARCHAR(36),
-            isEmailValidated BOOLEAN NOT NULL DEFAULT FALSE,
+            isEmailValidated BOOLEAN NOT NULL DEFAULT FALSE
         );`);
-    
-        await pool.query(`
+
+    await pool.query(`
         CREATE TABLE IF NOT EXISTS products (
             id INT PRIMARY KEY AUTO_INCREMENT,
             name VARCHAR(50) NOT NULL,
@@ -33,7 +33,7 @@ export const initDb = async () => {
                 REFERENCES users (id)
         );`);
 
-        await pool.query(`
+    await pool.query(`
         CREATE TABLE IF NOT EXISTS reservation (
             id INT PRIMARY KEY AUTO_INCREMENT,
             buyOrder TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -49,15 +49,13 @@ export const initDb = async () => {
             FOREIGN KEY (productId)
                 REFERENCES products (id)
         );`);
-    
-    
-        console.log("¡Base de datos creada satisfactoriamente!");
-        
-    } catch (error) {
-        console.error(error);
-    } finally {
-        process.exit();
-    }
-}
+
+    console.log("¡Base de datos creada satisfactoriamente!");
+  } catch (error) {
+    console.error(error);
+  } finally {
+    process.exit();
+  }
+};
 
 initDb();
