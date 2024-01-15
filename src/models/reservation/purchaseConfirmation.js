@@ -6,7 +6,7 @@ const purchaseConfirmation = async (
   reservationId
 ) => {
   await pool.query(
-    "UPDATE reservation SET reservationLocation = ? , reservationDate = ?  WHERE id = ? ",
+    "UPDATE reservation SET reservationLocation = ? , reservationDate = ?, status = 'finalizada'  WHERE id = ? ",
     [reservationLocation, reservationDate, reservationId]
   );
 };

@@ -86,15 +86,15 @@ Por productos:
 
 - POST /products/create
 
-  Permite al usuario crear productos en la Base de Datos
+  Permite al usuario crear productos 
 
 - PUT /products/:productid
 
-  Permite al usuario modificar su producto en la Base de Datos
+  Permite al usuario modificar su producto 
 
 - DELETE /products/:id
 
-  Permite al usuario eliminar su producto de la Base de Datos
+  Permite al usuario eliminar su producto 
 
 /////////////////////////////////////////////////////////////////
 

@@ -1,6 +1,6 @@
 import pool from "../../db/pool.js";
 import Joi from "joi";
-import purchaseConfirmationEmail from "../../utils/purchaseConfirmationEmail.js";
+import { purchaseConfirmationEmail } from "../../utils/index.js";
 import {
   getReservationById,
   purchaseConfirmation,
@@ -64,5 +64,10 @@ const controllerPurchaseConfirmation = async (req, res, next) => {
     next(error);
   }
 };
+
+/* SELECT products.sellerId
+FROM products
+JOIN reservation ON products.id = reservation.productId
+WHERE reservation.productId = 2; */
 
 export default controllerPurchaseConfirmation;
