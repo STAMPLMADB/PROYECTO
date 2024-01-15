@@ -30,12 +30,9 @@ const searchProducts = async ({ name, category, sellerId, price, location }) => 
     queryParams.push(`%${location}%`);
   }
 
-  try {
+  
     const [rows] = await pool.query(query, queryParams);
     return rows;
-  } catch (error) {
-    throw new Error(`Error al buscar productos: ${error.message}`);
-  }
 };
 
 export default searchProducts;

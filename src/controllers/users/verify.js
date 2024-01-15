@@ -26,14 +26,12 @@ const verify = async (req, res, next) => {
       generateError("Código de verificación incorrecto.", 400);
     }
 
-    const status =  await updateVerificationStatus(email);
+    const status = await updateVerificationStatus(email);
 
-      res
-        .status(200)
-        .send({
-          message: "Verificación exitosa. Ahora puedes iniciar sesión.",
-        });
-    } catch (error) {
+    res.status(200).send({
+      message: "Verificación exitosa. Ahora puedes iniciar sesión.",
+    });
+  } catch (error) {
     next(error);
   }
 };

@@ -48,12 +48,8 @@ const updateProduct = async ({
   query += " WHERE id = ?";
   queryParams.push(id);
 
-  try {
-    const result = await pool.query(query, queryParams);
-    return result.affectedRows > 0; // Devuelve true si se actualizaron filas propiedad nodde mysql
-  } catch (error) {
-    throw new Error(`Error al actualizar usuario: ${error.message}`);
-  }
+  const result = await pool.query(query, queryParams);
+  return result.affectedRows > 0; // Devuelve true si se actualizaron filas propiedad nodde mysql
 };
 
 export default updateProduct;
