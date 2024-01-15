@@ -40,7 +40,6 @@ export const initDb = async () => {
             reservationLocation VARCHAR(100),
             reservationDate DATETIME,
             status ENUM('pendiente', 'en proceso', 'finalizada') NOT NULL,
-            reservation_token VARCHAR(36),
             review ENUM('1', '2', '3', '4', '5'),
             buyerId INT,
             FOREIGN KEY (buyerId)

@@ -25,3 +25,5 @@ const controllerStatusReservation = async (req, res, next) => {
 };
 
 export default controllerStatusReservation;
+
+// Queda cerrar la eliminación de la lógica reservation_token
