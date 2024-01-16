@@ -11,8 +11,14 @@ const controllerCreateProductId = async (req, res, next) => {
     const productData = req.body;
 
     const file = req.files.avatar;
+    const file2 = req.files.avatar2;
+
     const finalFileName = uuidv4() + "-" + file.name;
     file.mv(`./uploads/${finalFileName}`);
+
+    
+    const finalFileName2 = uuidv4() + "-" + file2.name;
+    file2.mv(`./uploads/${finalFileName2}`);
 
     // JOII
     const allowedCategories = [
@@ -29,8 +35,10 @@ const controllerCreateProductId = async (req, res, next) => {
         .required(),
       price: Joi.number().min(0).required(),
       location: Joi.string().required(),
-      avatar: Joi.optional(),
       description: Joi.string().required(),
+      avatar: Joi.optional(),
+      avatar2: Joi.optional(),
+      
     });
 
     const validation = schema.validate(req.body);
@@ -43,6 +51,7 @@ const controllerCreateProductId = async (req, res, next) => {
     const productId = await createProductId(
       productData,
       finalFileName,
+      finalFileName2,
       sellerId
     );
     res

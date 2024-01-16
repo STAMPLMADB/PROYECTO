@@ -8,7 +8,7 @@ const insertUser = async ({
     verificationCode,
   }) => {
     const [{ insertId }] = await pool.query(
-      "INSERT INTO users (name, email, password, verification_code) VALUES (?, ?, ?, ?)",
+      "INSERT INTO users (name, email, password, verificationCode) VALUES (?, ?, ?, ?)",
       [name, email, hashedPassword, verificationCode]
     );
     return insertId;

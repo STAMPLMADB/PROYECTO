@@ -7,6 +7,7 @@ const updateProduct = async ({
   price,
   location,
   imageURL,
+  imageURL2,
   description,
 }) => {
   const queryParams = [];
@@ -35,6 +36,10 @@ const updateProduct = async ({
   if (imageURL) {
     query += " imageURL = ?,";
     queryParams.push(imageURL);
+  }
+  if (imageURL2) {
+    query += " imageURL = ?,";
+    queryParams.push(imageURL2);
   }
 
   if (description) {

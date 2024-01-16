@@ -1,7 +1,7 @@
 
 import { generateError } from "../../utils/index.js";
 import {
-  getReservationByToken,
+  // getReservationByToken,
   updateReservationStatus,
 } from "../../models/reservation/index.js";
 

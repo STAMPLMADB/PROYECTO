@@ -1,16 +1,19 @@
 import sendMail from "./sendMail.js";
 
-//efectuar el envío del correo al usuario
-//aquí lo que está dentro del parentesis son parámetros
 
-const sendVerificationMail = async (email, verificationCode) => {
-  // envia el mail con el debido objeto de transporte
-  
+const linkverificacion = "http://localhost:5173/validation:"
+const sendVerificationMail = async (email, verificationCode, link) => {
+
+    link = linkverificacion+verificationCode
     await sendMail(
       email,
       "Verificacion de cuenta",
-      `¡Gracias por registrarte! Tu código de verificación es: ${verificationCode}`
+      `¡Gracias por registrarte! Tu código de verificación es: ${verificationCode}`,
+      link
+
     );
 };
 
 export default sendVerificationMail;
+
+
