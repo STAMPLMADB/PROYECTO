@@ -1,16 +1,16 @@
 
 import { generateError } from "../../utils/index.js";
 import {
-  // getReservationByToken,
+   getReservationById,
   updateReservationStatus,
 } from "../../models/reservation/index.js";
 
 const controllerStatusReservation = async (req, res, next) => {
   try {
     const { reservationToken } = req.body;
-    const reservation = await getReservationByToken(reservationToken);
+    const reservation = await getReservationById(reservationToken);
 
-    if (reservation && reservation.reservation_token === reservationToken) {
+    if (reservation && reservation.id === reservationToken) {
       await updateReservationStatus(reservationToken);
 
       res.status(200).send({

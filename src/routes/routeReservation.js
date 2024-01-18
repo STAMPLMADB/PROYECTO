@@ -4,13 +4,13 @@ import { controllerPurchaseConfirmation, controllerReservation, controllerStatus
 
 const router = express.Router();
 
-router.post("/reservation", authenticateToken ,controllerReservation);
+router.post("/reservation/:productId", authenticateToken ,controllerReservation);
 
 
 //Verificar reserva? - Cambiar status de pendiente --> en proceso
 router.post('/reservation-update',authenticateToken,controllerStatusReservation)
 
 //COMPRA HECHA 
-router.patch('/products/purchaseConfirmation',authenticateToken, controllerPurchaseConfirmation)
+router.patch('/products/purchaseConfirmation/:reservationId',authenticateToken, controllerPurchaseConfirmation)
 
 export default router;

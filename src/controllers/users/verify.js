@@ -6,7 +6,7 @@ import {
 } from "../../models/users/index.js";
 const verify = async (req, res, next) => {
   try {
-    const { email,verificationCode } = req.body;
+    const { email, verificationCode } = req.body;
     const schema = Joi.object().keys({
       email: Joi.string().email().required(),
       verificationCode: Joi.string().required(),
@@ -14,11 +14,10 @@ const verify = async (req, res, next) => {
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      return res.send(validation.error.message);
-     ;
+      generateError(validation.error.message);
     }
 
-    const user = await getUserByVerificationCode(email,verificationCode);
+    const user = await getUserByVerificationCode(email, verificationCode);
     if (user && user.verificationCode === verificationCode) {
       await updateVerificationStatus(email);
 
@@ -29,7 +28,6 @@ const verify = async (req, res, next) => {
       generateError("Código de verificación incorrecto.", 400);
     }
   } catch (error) {
-  
     next(error);
   }
 };

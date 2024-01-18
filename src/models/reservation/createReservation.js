@@ -7,12 +7,11 @@ const createReservation = async (reservationData, buyerId, productId,reservation
 
     // Consulta para insertar la reserva
     const insertQuery =
-      "INSERT INTO reservation (buyOrder, buyerId, productId) VALUES (?, ?, ?, ?)";
+      "INSERT INTO reservation (buyOrder, buyerId, productId) VALUES (?, ?, ?)";
     const [result] = await pool.query(insertQuery, [
       buyOrder,
       buyerId,
-      productId,
-      reservationToken
+      productId
     ]);
 
     if (!result || !result.insertId) {
