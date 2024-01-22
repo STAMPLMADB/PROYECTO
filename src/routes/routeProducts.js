@@ -14,8 +14,10 @@ const router = express.Router();
 
 router.get("/products", controllerGetAllProducts);
 
-//Usuarioo vea sus productos
-router.get("/products/user/:userId", controllerGetProductsByUserId);
+//Usuario vea sus productos
+router.get("/products/user",  authenticateToken,controllerGetProductsByUserId);
+
+
 
 router.post("/products/search", controllerSearchProducts);
 

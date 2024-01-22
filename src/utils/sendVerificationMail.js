@@ -1,19 +1,17 @@
 import sendMail from "./sendMail.js";
 
 
-const linkverificacion = "http://localhost:5173/validation:"
+const linkverificacion = "http://localhost:5173/profile/validation/"
 const sendVerificationMail = async (email, verificationCode, link) => {
 
-    link = linkverificacion+verificationCode
+  link = linkverificacion+verificationCode +"/"+ email
     await sendMail(
       email,
       "Verificacion de cuenta",
-      `¡Gracias por registrarte! Tu código de verificación es: ${verificationCode}`,
+      `¡Vete al siguiente enlace para confirmar tu cuenta!`,
       link
 
-    );
+    )
 };
 
 export default sendVerificationMail;
-
-

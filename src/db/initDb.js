@@ -27,7 +27,7 @@ export const initDb = async () => {
         CREATE TABLE IF NOT EXISTS products (
             id INT PRIMARY KEY AUTO_INCREMENT,
             name VARCHAR(50) NOT NULL,
-            category ENUM('consola', 'ordenador', 'radio', 'televisor', 'movil') NOT NULL,
+            category ENUM('consola', 'ordenador', 'radio', 'videojuegos', 'movil', 'otros') NOT NULL,
             price DECIMAL(10 , 2 ) NOT NULL,
             location VARCHAR(100),
             imageURL VARCHAR(255),
