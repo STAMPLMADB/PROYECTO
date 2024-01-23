@@ -16,7 +16,7 @@ const controllerSearchProducts = async (req, res, next) => {
 
 // pendiente de ver si necesita JOI
 //JOIII
-const allowedCategories = ['consola', 'ordenador', 'radio', 'televisor', 'movil']
+const allowedCategories = ['consola', 'ordenador', 'radio', 'videojuegos', 'movil', 'otros']
 const schema = Joi.object().keys({
   name: Joi.string().min(1).max(24),
   category: Joi.string().valid(allowedCategories),

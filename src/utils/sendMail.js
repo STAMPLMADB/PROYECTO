@@ -11,9 +11,7 @@ const transport = nodemailer.createTransport({
 });
 
 const createDynamicHTML = (text, link) => {
-  return;
-
-`<div style="background-image: url(https://i.pinimg.com/564x/f3/a6/29/f3a629d585af11298a8d99c25e658f7c.jpg); background-size: cover; 
+  return `<div style="background-image: url(https://i.pinimg.com/564x/f3/a6/29/f3a629d585af11298a8d99c25e658f7c.jpg); background-size: cover; 
   padding: 20px;
    width: 600px; 
   height: 600px; 
