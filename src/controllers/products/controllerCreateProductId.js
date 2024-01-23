@@ -25,8 +25,9 @@ const controllerCreateProductId = async (req, res, next) => {
       "consola",
       "ordenador",
       "radio",
-      "televisor",
+      "videjuegos",
       "movil",
+      "otros",
     ];
     const schema = Joi.object().keys({
       name: Joi.string().min(1).max(80).required(),
