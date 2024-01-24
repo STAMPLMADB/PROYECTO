@@ -16,6 +16,7 @@ const profile = async (req, res, next) => {
       name: Joi.string().min(1).max(24),
       password: joiPassword
         .string()
+        .optional()
         .min(8)
         .minOfUppercase(1)
         .minOfSpecialCharacters(1),

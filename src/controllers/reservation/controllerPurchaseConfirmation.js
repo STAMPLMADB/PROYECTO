@@ -54,11 +54,10 @@ const controllerPurchaseConfirmation = async (req, res, next) => {
       reservationId
     );
 
-    const emailResult = await pool.query(`
-    SELECT u.email 
-    FROM users u
-    INNER JOIN reservation r ON r.buyerId = u.id
-    WHERE r.id = ?`, [reservationId]);
+    const emailResult = await pool.query(
+    `SELECT products.sellerId FROM products
+    JOIN reservation ON products.id = reservation.productId
+    WHERE reservation.productId = ?`, [productId]);
 
     if (!emailResult || !emailResult.length) {
       throw new Error("Correo electrónico del comprador no encontrado");
@@ -77,10 +76,5 @@ const controllerPurchaseConfirmation = async (req, res, next) => {
      next(error);
   }
 };
-
-/* SELECT products.sellerId
-FROM products
-JOIN reservation ON products.id = reservation.productId
-WHERE reservation.productId = 2; */
 
 export default controllerPurchaseConfirmation;
