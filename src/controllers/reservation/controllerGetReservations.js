@@ -4,7 +4,7 @@ const controllerGetReservations = async (req, res, next) => {
   try {
     const loggedUserId = req.user.id;
     const [userReservations] = await pool.query(
-      `Select * from reservation WHERE buyerId = ?`,
+      `Select p.*, r.*,u.name buyerName, u.email, u.avatarURL  from reservation r JOIN products p ON r.productId = p.id JOIN users u ON r.buyerId = u.id  WHERE buyerId = ?`,
       [loggedUserId]
     );
     res.json({ data: userReservations });
