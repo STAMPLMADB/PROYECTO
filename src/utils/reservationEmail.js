@@ -1,11 +1,16 @@
 import sendMail from "./sendMail.js";
 
-const reservationEmail = async (email, reservationId) => {
-  // envia el mail con el debido objeto de transporte
+const reservationEmail = async (email, reservationId,buyerEmail) => {
+
+  const link = `http://localhost:5173/status/${reservationId}`
+  
   await sendMail(
     email,
     "Propuesta de compra",
-    `¡Felicidades un usuario se ha interesado por tu producto! Pincha aquí para aceptar la propuesta de compra http://localhost:3001/reservation-update?reservationId=${reservationId}`
+    `¡Felicidades un usuario se ha interesado por tu producto! Pincha aquí para aceptar la propuesta de compra 
+    el correo del usuario con el ue tienes que contactar es ${buyerEmail}`,
+  link
+
   );
 };
 

@@ -9,7 +9,7 @@ router.post("/reservation/:productId", authenticateToken ,controllerReservation)
 
 
 //Verificar reserva? - Cambiar status de pendiente --> en proceso
-router.post('/reservation-update',authenticateToken,controllerStatusReservation)
+router.post('/reservation-update',controllerStatusReservation)
 
 //COMPRA HECHA 
 router.patch('/products/purchaseConfirmation/:reservationId',authenticateToken, controllerPurchaseConfirmation)
