@@ -1,7 +1,7 @@
 import pool from "../../db/pool.js";
 
 
-const updateUser = async ({ id, name, biography, avatarURL }) => {
+const updateUser = async ({ id, name, biography, password,avatarURL }) => {
   const queryParams = [];
   let query = "UPDATE users SET";
 
@@ -14,7 +14,10 @@ const updateUser = async ({ id, name, biography, avatarURL }) => {
     query += " biography = ?,";
     queryParams.push(biography);
   }
-
+  if (password) {
+    query += " password = ?,";
+    queryParams.push(password);
+  }
   if (avatarURL) {
     query += " avatarURL = ?,";
     queryParams.push(avatarURL);

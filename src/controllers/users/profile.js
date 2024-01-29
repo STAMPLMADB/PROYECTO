@@ -44,12 +44,14 @@ const profile = async (req, res, next) => {
       userDataToUpdate.biography = biography;
     }
 
-    const file = req.files.avatar;
-    const finalFileName = Date.now() + "-" + file.name;
-    file.mv(`./uploads/${finalFileName}`);
+    if (req.files?.avatar) {
+      const file = req.files.avatar;
 
-    if (req.files) {
+      const finalFileName = Date.now() + "-" + file.name;
+      file.mv(`./uploads/${finalFileName}`);
       userDataToUpdate.avatarURL = finalFileName;
+
+
     }
     await updateUser({ id, ...userDataToUpdate });
 

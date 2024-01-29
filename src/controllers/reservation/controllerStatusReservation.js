@@ -2,27 +2,28 @@
 import { generateError } from "../../utils/index.js";
 import {
   
-  updateReservationStatus,
+  updateReservationStatus,getReservationById
 } from "../../models/reservation/index.js";
 
 const controllerStatusReservation = async (req, res, next) => {
   try {
     const { reservationId } = req.body;
-   console.log(reservationId);
-   console.log("controllerstatus ");
+  
+  
 
     if (reservationId ) {
       await updateReservationStatus(reservationId);
 
       res.status(200).send({
         message: "Se ha cambiado el status a en proceso correctamente",
+     
       });
     } else {
       generateError("Ha ocurrido un error", 400);
     }
   } catch (error) {
     next(error);
-  }
+  }  
 };
 
 export default controllerStatusReservation;
