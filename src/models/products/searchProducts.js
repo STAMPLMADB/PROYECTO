@@ -16,10 +16,10 @@ const searchProducts = async ({ name, category, sellerId, price, location }) => 
     queryParams.push(`%${category}%`);
   }
 
-  if (sellerId) {
-    query += " AND sellerId = ?";
-    queryParams.push(sellerId);
-  }
+  // if (sellerId) {
+  //   query += " AND sellerId = ?";
+  //   queryParams.push(sellerId);
+  // }
   // un beetween de precios ....
   if (price) {
     query += " AND price = ?";

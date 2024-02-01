@@ -19,7 +19,7 @@ router.get("/products/user",  authenticateToken,controllerGetProductsByUserId);
 
 
 
-router.post("/products/search", controllerSearchProducts);
+router.get("/products/search", controllerSearchProducts);
 
 //vincular id s producto solo pueden darlo de alta
 router.post("/products/create", authenticateToken, controllerCreateProductId);

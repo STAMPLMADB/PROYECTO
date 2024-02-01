@@ -10,23 +10,25 @@ const controllerCreateProductId = async (req, res, next) => {
   try {
     const productData = req.body;
 
+    console.log(productData.name);
+
     const file = req.files.avatar;
-    const file2 = req.files.avatar2;
 
     const finalFileName = uuidv4() + "-" + file.name;
     file.mv(`./uploads/${finalFileName}`);
 
-    
+    const file2 = req.files.avatar2;
+
     const finalFileName2 = uuidv4() + "-" + file2.name;
     file2.mv(`./uploads/${finalFileName2}`);
 
-    // JOII
+    //JOII
     const allowedCategories = [
       "consola",
       "ordenador",
       "radio",
-      "videjuegos",
       "movil",
+      "videojuego",
       "otros",
     ];
     const schema = Joi.object().keys({
@@ -37,15 +39,14 @@ const controllerCreateProductId = async (req, res, next) => {
       price: Joi.number().min(0).required(),
       location: Joi.string().required(),
       description: Joi.string().required(),
-      avatar: Joi.optional(),
-      avatar2: Joi.optional(),
-      
+      avatar: Joi.string().optional(),
+      avatar2: Joi.string().optional(),
     });
 
     const validation = schema.validate(req.body);
 
     if (validation.error) {
-      generateError(validation.error.message);
+      generateError("Error validacion", validation.error.message);
     }
 
     const sellerId = req.user.id; // user.id  no lo tengo claro
