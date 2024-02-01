@@ -2,7 +2,7 @@
 import { generateError } from "../../utils/index.js";
 import {
   
-  updateReservationStatus,getReservationById
+  updateReservationStatus
 } from "../../models/reservation/index.js";
 
 const controllerStatusReservation = async (req, res, next) => {

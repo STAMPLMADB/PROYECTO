@@ -1,9 +1,9 @@
 import pool from "../../db/pool.js";
 
-const getStatusByProductId = async (id) =>{
+const getStatusByProductId = async (productId) =>{
     const [[status]] = await pool.query(
        " SELECT status FROM reservation WHERE productId = ? " ,
-       [id]
+       [productId]
     );
     return status
 }
