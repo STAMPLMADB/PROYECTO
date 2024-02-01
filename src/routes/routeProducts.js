@@ -17,7 +17,7 @@ router.get("/products", controllerGetAllProducts);
 //Usuarioo vea sus productos
 router.get("/products/user/:userId", controllerGetProductsByUserId);
 
-router.post("/products/search", controllerSearchProducts);
+router.get("/products/search", controllerSearchProducts);
 
 //vincular id s producto solo pueden darlo de alta
 router.post("/products/create", authenticateToken, controllerCreateProductId);
