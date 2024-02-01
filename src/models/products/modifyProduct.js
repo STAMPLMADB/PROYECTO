@@ -38,7 +38,7 @@ const updateProduct = async ({
     queryParams.push(imageURL);
   }
   if (imageURL2) {
-    query += " imageURL = ?,";
+    query += " imageURL2 = ?,";
     queryParams.push(imageURL2);
   }
 

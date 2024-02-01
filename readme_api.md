@@ -36,7 +36,7 @@ Por users:
    
    1. name
    2. email
-   3. hashedPasword
+   3. hashedPassword
    4. verificationCode
 
 - POST /verify

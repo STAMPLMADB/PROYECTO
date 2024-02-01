@@ -1,7 +1,7 @@
 import pool from "../../db/pool.js";
-import bcrypt from "bcrypt";
 
-const updateUser = async ({ id, name, password, biography, avatarURL }) => {
+
+const updateUser = async ({ id, name, biography, password,avatarURL }) => {
   const queryParams = [];
   let query = "UPDATE users SET";
 
@@ -10,17 +10,14 @@ const updateUser = async ({ id, name, password, biography, avatarURL }) => {
     queryParams.push(name);
   }
 
-  if (password) {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    query += " password = ?,";
-    queryParams.push(hashedPassword);
-  }
-
   if (biography) {
     query += " biography = ?,";
     queryParams.push(biography);
   }
-
+  if (password) {
+    query += " password = ?,";
+    queryParams.push(password);
+  }
   if (avatarURL) {
     query += " avatarURL = ?,";
     queryParams.push(avatarURL);

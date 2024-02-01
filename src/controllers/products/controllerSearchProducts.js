@@ -13,7 +13,7 @@ const controllerSearchProducts = async (req, res, next) => {
       price,
       location,
     });
-
+    
     console.log("este ess el req query", req.query);
     // pendiente de ver si necesita JOI
     //JOIII
