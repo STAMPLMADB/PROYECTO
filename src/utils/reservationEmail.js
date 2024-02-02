@@ -2,7 +2,7 @@ import sendMail from "./sendMail.js";
 
 const reservationEmail = async (email, reservationId,buyerEmail) => {
 
-  const link = `http://localhost:5173/status/${reservationId}`
+  const link = `http://localhost:5173/confirmacion/${reservationId}/${email}`
   
   await sendMail(
     email,
