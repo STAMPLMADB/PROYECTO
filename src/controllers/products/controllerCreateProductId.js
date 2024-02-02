@@ -9,7 +9,7 @@ import generateError from "../../utils/generateError.js";
 const controllerCreateProductId = async (req, res, next) => {
   try {
     const productData = req.body;
-
+    const sellerId = req.user.id;
     const file = req.files.avatar;
     const file2 = req.files.avatar2;
 
@@ -48,7 +48,7 @@ const controllerCreateProductId = async (req, res, next) => {
       generateError(validation.error.message);
     }
 
-    const sellerId = req.user.id; // user.id  no lo tengo claro
+    
 
     if (req.files?.avatar2) {
       const finalFileName2 = Date.now() + "-" + file2.name;
@@ -60,7 +60,6 @@ const controllerCreateProductId = async (req, res, next) => {
     const productId = await createProductId(
       productData,
       finalFileName,
-  
       sellerId
     );
     res

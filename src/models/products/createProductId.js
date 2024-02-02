@@ -3,10 +3,9 @@ import pool from "../../db/pool.js";
 const createProductId = async (
   productData,
   finalFileName,
-  finalFileName2,
   sellerId
 ) => {
-  const { name, category, price, location, description } = productData;
+  const { name, category, price, location, description,finalFileName2 } = productData;
 
   const query =
     "INSERT INTO products (name, category, price, location, imageURL, imageURL2, description, sellerId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
