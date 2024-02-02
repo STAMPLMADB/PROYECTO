@@ -4,6 +4,7 @@ import {
 } from "../../models/products/index.js";
 import { generateError } from "../../utils/index.js";
 import { getStatusByProductId } from "../../models/reservation/index.js";
+import Joi from "joi";
 
 const controllerModifyProduct = async (req, res, next) => {
   try {
@@ -11,6 +12,33 @@ const controllerModifyProduct = async (req, res, next) => {
     const loggedUserId = req.user.id;
     const id = req.params.productid;
 
+    const allowedCategories = [
+      "consola",
+      "ordenador",
+      "radio",
+      "videjuegos",
+      "movil",
+      "otros",
+    ];
+
+    const schema = Joi.object().keys({
+      name: Joi.string().min(1).max(80),
+      category: Joi.string()
+        .valid(...allowedCategories),
+       
+      price: Joi.number().min(0),
+      location: Joi.string(),
+      description: Joi.string(),
+      avatar: Joi.optional(),
+      avatar2: Joi.optional(),
+      
+    });
+
+    const validation = schema.validate(req.body);
+
+    if (validation.error) {
+      generateError(validation.error.message);
+    }
     const product = await selectProductById(id);
 
     if (!product) {

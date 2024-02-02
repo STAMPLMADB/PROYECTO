@@ -17,8 +17,8 @@ const controllerCreateProductId = async (req, res, next) => {
     file.mv(`./uploads/${finalFileName}`);
 
     
-    const finalFileName2 = uuidv4() + "-" + file2.name;
-    file2.mv(`./uploads/${finalFileName2}`);
+    // const finalFileName2 = uuidv4() + "-" + file2.name;
+    // file2.mv(`./uploads/${finalFileName2}`);
 
     // JOII
     const allowedCategories = [
@@ -49,10 +49,18 @@ const controllerCreateProductId = async (req, res, next) => {
     }
 
     const sellerId = req.user.id; // user.id  no lo tengo claro
+
+    if (req.files?.avatar2) {
+      const finalFileName2 = Date.now() + "-" + file2.name;
+      file2.mv(`./uploads/${finalFileName2}`);
+      productData.imageURL2 = finalFileName2;
+    }
+
+
     const productId = await createProductId(
       productData,
       finalFileName,
-      finalFileName2,
+  
       sellerId
     );
     res
