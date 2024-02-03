@@ -1,5 +1,7 @@
 import controllerPurchaseConfirmation from "./controllerPurchaseConfirmation.js";
 import controllerReservation from "./controllerReservation.js";
 import controllerStatusReservation from "./controllerStatusReservation.js";
+import controllerGetReserva from "./controllerGetReserva.js"
+import controllerGetReservations from "./controllerGetReservations.js";
 
-export {controllerPurchaseConfirmation,controllerReservation,controllerStatusReservation}
+export {controllerPurchaseConfirmation,controllerReservation,controllerStatusReservation,controllerGetReservations,controllerGetReserva}
