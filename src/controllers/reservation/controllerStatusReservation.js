@@ -7,18 +7,20 @@ import {
 
 const controllerStatusReservation = async (req, res, next) => {
   try {
-    const { reservationId } = req.body;
+    const  {reservationId} = req.body
   
-  
+  console.log(reservationId);
 
     if (reservationId ) {
+      console.log(reservationId);
       await updateReservationStatus(reservationId);
-
+ 
       res.status(200).send({
         message: "Se ha cambiado el status a en proceso correctamente",
      
       });
     } else {
+      console.log(reservationId);
       generateError("Ha ocurrido un error", 400);
     }
   } catch (error) {
