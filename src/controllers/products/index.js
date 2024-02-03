@@ -4,6 +4,7 @@ import controllerCreateProductId from "./controllerCreateProductId.js";
 import controllerSearchProducts from "./controllerSearchProducts.js";
 import controllerModifyProduct from "./controllerModifyProduct.js";
 import controllerDeleteProduct from "./controllerDeleteProduct.js";
+import controllerSelectProductById from "./controllerSelectProductById.js";
 
 export {
   controllerGetAllProducts,
@@ -11,5 +12,6 @@ export {
   controllerCreateProductId,
   controllerSearchProducts,
   controllerModifyProduct,
-  controllerDeleteProduct
+  controllerDeleteProduct,
+  controllerSelectProductById,
 };

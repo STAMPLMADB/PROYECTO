@@ -6,7 +6,8 @@ import {
   controllerGetAllProducts,
   controllerCreateProductId,
   controllerModifyProduct,
-  controllerDeleteProduct
+  controllerDeleteProduct,
+  controllerSelectProductById,
 } from "../controllers/products/index.js";
 
 const router = express.Router();
@@ -15,9 +16,10 @@ const router = express.Router();
 router.get("/products", controllerGetAllProducts);
 
 //Usuario vea sus productos
-router.get("/products/user",  authenticateToken,controllerGetProductsByUserId);
+router.get("/products/user", authenticateToken, controllerGetProductsByUserId);
 
-
+//Ver un producto en especifico
+router.get("/products/product/", controllerSelectProductById);
 
 router.get("/products/search", controllerSearchProducts);
 
@@ -25,7 +27,7 @@ router.get("/products/search", controllerSearchProducts);
 router.post("/products/create", authenticateToken, controllerCreateProductId);
 
 // Modificar producto
-router.put("/products/:productid", authenticateToken,controllerModifyProduct);
+router.put("/products/:productid", authenticateToken, controllerModifyProduct);
 
 //Eliminar producto
 router.delete("/products/:id", authenticateToken, controllerDeleteProduct);
