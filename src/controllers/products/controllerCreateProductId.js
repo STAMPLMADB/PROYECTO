@@ -25,7 +25,7 @@ const controllerCreateProductId = async (req, res, next) => {
       "consola",
       "ordenador",
       "radio",
-      "videjuegos",
+      "videojuegos",
       "movil",
       "otros",
     ];

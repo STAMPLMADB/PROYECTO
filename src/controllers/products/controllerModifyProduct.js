@@ -16,7 +16,7 @@ const controllerModifyProduct = async (req, res, next) => {
       "consola",
       "ordenador",
       "radio",
-      "videjuegos",
+      "videojuegos",
       "movil",
       "otros",
     ];
