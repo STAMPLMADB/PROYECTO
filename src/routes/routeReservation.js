@@ -1,6 +1,7 @@
 import express from "express";
 import authenticateToken from "../middlewares/middleToken.js";
 import { controllerGetReserva, controllerPurchaseConfirmation, controllerReservation, controllerStatusReservation ,controllerGetReservations} from "../controllers/reservation/index.js";
+import controllerGetReservationsSeller from "../controllers/products/controllerGetReservationSeller.js";
 
 
 const router = express.Router();
@@ -16,6 +17,7 @@ router.patch('/products/purchaseConfirmation/:reservationId',authenticateToken, 
 
 //ver todas las reservas del usuario logeado
 router.get("/reservations", authenticateToken, controllerGetReservations)
+router.get("/reservationsSeller", authenticateToken, controllerGetReservationsSeller)
 router.get("/reservaStatus/:productId", authenticateToken, controllerGetReserva)
 
 export default router;
