@@ -5,14 +5,16 @@ const selectProductById = async (id) => {
   const [[product]] = await pool.query("SELECT * FROM products WHERE id = ?;", [
     id,
   ]);
-  const [seller] = await pool.query("SELECT * FROM users WHERE id = ?;", [product.sellerId]);
+  const [[seller]] = await pool.query("SELECT * FROM users WHERE id = ?;", [
+    product.sellerId,
+  ]);
   //console.log(result);
   //const { id: productId, sellerId, ...productInfo } = result[0];
   //const seller = { id: sellerId, ...result[0] };
 
   return {
     product: product,
-    seller:seller,
+    seller: seller,
   };
 };
 

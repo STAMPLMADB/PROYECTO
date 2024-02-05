@@ -12,12 +12,13 @@ const controllerReservation = async (req, res, next) => {
 
     const buyerId = req.user.id;
  
-    const {sellerId} = await selectProductById(productId)
+    const {seller} = await selectProductById(productId)
     const status = await getStatusByProductId(productId)
+    console.log(seller.id);
     if(status){
      generateError("El articulo tiene una solicitud pendien",400)
     }
-        else if(sellerId=== buyerId){
+        else if(seller.id=== buyerId){
         generateError("El articulo que intentas comprar es tuyo",400)
     
 }else{

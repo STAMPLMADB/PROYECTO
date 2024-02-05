@@ -45,7 +45,7 @@ const controllerModifyProduct = async (req, res, next) => {
       generateError("El producto no existe", 404);
     }
 
-    if (product.sellerId !== loggedUserId) {
+    if (product.seller.id !== loggedUserId) {
       generateError("No eres el propietario de este producto", 403);
     }
 
