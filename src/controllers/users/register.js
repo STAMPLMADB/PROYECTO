@@ -14,7 +14,7 @@ const register = async (req, res, next) => {
 // JOI
     const joiPassword = Joi.extend(joiPasswordExtendCore);
     const schema = Joi.object().keys({
-      name: Joi.string().min(1).max(24).required(),
+      name: Joi.string().min(3).max(50).required().messages({'string.min':'El nombre debe tener minimo 10 caracteres','string.max':'El nombre debe tener máximo 50 caracteres','any.required':'El nombre es obligatorio'}),
       email: Joi.string().email().required(),
       password: joiPassword.string().min(8).minOfUppercase(1).minOfSpecialCharacters(1).required()
     });

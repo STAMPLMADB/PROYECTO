@@ -1,7 +1,10 @@
 import pool from "../../db/pool.js";
 
-const getAllProducts = async () => {
-  const query = "SELECT * FROM products";
+const getAllProducts = async ({limit}) => {
+  let query = "SELECT * FROM products";
+  if (limit){
+    query+=` LIMIT ${limit}`
+  }
   const [rows] = await pool.query(query);
   console.log(rows);
   return rows;

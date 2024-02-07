@@ -8,7 +8,8 @@
     "dev": "nodemon src/server.js",
     "initDb": "node src/db/initDb.js",
     "dropDb": "node src/db/dropDb.js",
-    "resetDb": "node src/db/dropDb.js && node src/db/initDb.js"
+    "resetDb": "node src/db/dropDb.js && node src/db/initDb.js",
+    "populateDb":"node src/db/populateDb.js"
   },
   "keywords": [],
   "author": "Luis Manuel Dominguez, Dani Vazquez, Marta Dieguez, Miguel Dario Garcia Quintas, Juan Gabriel Callejo",
