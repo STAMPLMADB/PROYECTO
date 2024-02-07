@@ -15,8 +15,8 @@ const register = async (req, res, next) => {
     const joiPassword = Joi.extend(joiPasswordExtendCore);
     const schema = Joi.object().keys({
       name: Joi.string().min(3).max(50).required().messages({'string.min':'El nombre debe tener minimo 10 caracteres','string.max':'El nombre debe tener máximo 50 caracteres','any.required':'El nombre es obligatorio'}),
-      email: Joi.string().email().required(),
-      password: joiPassword.string().min(8).minOfUppercase(1).minOfSpecialCharacters(1).required()
+      email: Joi.string().email().required().messages({}),
+      password: joiPassword.string().min(8).minOfUppercase(1).minOfSpecialCharacters(1).required().messages({'password.min':'La contraseña debe tener como mínimo 8 caracteres','password.minOfUpperCase':'La contraseña debe tener como mínimo 1 mayúscula','password.minOfSpecialCharacters':'La contraseña debe tener como mínimo 1 caracter especial','any.required':'La contraseña es obligatoria'})
     });
     
     const validation = schema.validate(req.body);

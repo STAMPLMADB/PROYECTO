@@ -45,7 +45,7 @@ export const initDb = async () => {
             buyOrder TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             reservationLocation VARCHAR(100),
             reservationDate DATETIME,
-            status ENUM('pendiente', 'en proceso', 'finalizada') NOT NULL,
+            status ENUM('pendiente', 'finalizada') NOT NULL,
             review ENUM('1', '2', '3', '4', '5'),
             buyerId INT,
             FOREIGN KEY (buyerId)
@@ -54,6 +54,16 @@ export const initDb = async () => {
             FOREIGN KEY (productId)
                 REFERENCES products (id)
         );`);
+
+    await pool.query(`CREATE TABLE IF NOT EXISTS favorites (
+      id INT PRIMARY KEY AUTO_INCREMENT,
+      userId INT NOT NULL,
+      productId INT NOT NULL,
+      FOREIGN KEY (userId)
+          REFERENCES users (id),
+      FOREIGN KEY (productId)
+          REFERENCES products (id)
+  );`);
 
     console.log("¡Base de datos creada satisfactoriamente!");
   } catch (error) {
