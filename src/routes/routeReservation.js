@@ -1,6 +1,6 @@
 import express from "express";
 import authenticateToken from "../middlewares/middleToken.js";
-import { controllerGetReserva, controllerPurchaseConfirmation, controllerReservation, controllerStatusReservation ,controllerGetReservations} from "../controllers/reservation/index.js";
+import { controllerGetReserva, controllerPurchaseConfirmation, controllerReservation,controllerGetReservations} from "../controllers/reservation/index.js";
 import controllerGetReservationsSeller from "../controllers/products/controllerGetReservationSeller.js";
 
 
@@ -10,7 +10,7 @@ router.post("/reservation/:productId", authenticateToken ,controllerReservation)
 
 
 //Verificar reserva? - Cambiar status de pendiente --> en proceso
-router.put('/reservation-update',authenticateToken,controllerStatusReservation)
+
 
 //COMPRA HECHA 
 router.patch('/products/purchaseConfirmation/:reservationId',authenticateToken, controllerPurchaseConfirmation)

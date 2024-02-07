@@ -5,15 +5,17 @@ import sendMail from "./sendMail.js";
 const purchaseConfirmationEmail = async (
   email,
   reservationLocation,
-  reservationDate
+  reservationDate,
+  reservationId
 ) => {
-  const link = `http://localhost:5173`
+  const ruta = "/profile/reservations"
+  const link = `http://localhost:5173/confirmacion/${reservationId}/${email}/${encodeURIComponent(ruta)}`
   await sendMail(
     email,
     "Compra confirmada",
-    `El vendedor ha confirmado tu compra, los datos de entrega 
-    de tu producto son fecha de entrega:${reservationDate}
-     y lugar de la entrega:${reservationLocation}, esperamos que disfrutes el producto. Gracias por utilizar RetroShop`,
+    `El vendedor ha confirmado tu compra, la entrega 
+    de tu producto en la fecha y hora:${reservationDate}
+     y lugar de la entrega será en:${reservationLocation}, Esperamos que disfrutes de tu compra. Gracias por utilizar RetroShop`,
      link 
   );
 };

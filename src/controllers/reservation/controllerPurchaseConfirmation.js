@@ -71,7 +71,8 @@ const controllerPurchaseConfirmation = async (req, res, next) => {
     await purchaseConfirmationEmail(
       email,
       reservationLocation,
-      reservationDate
+      reservationDate,
+      reservationId
     );
     res.status(201).json({ message: " Compra confirmada con éxito" });
   } catch (error) {
