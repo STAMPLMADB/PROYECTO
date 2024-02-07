@@ -7,12 +7,14 @@ const purchaseConfirmationEmail = async (
   reservationLocation,
   reservationDate
 ) => {
+  const link = `http://localhost:5173`
   await sendMail(
     email,
     "Compra confirmada",
     `El vendedor ha confirmado tu compra, los datos de entrega 
     de tu producto son fecha de entrega:${reservationDate}
-     y lugar de la entrega:${reservationLocation}, esperamos que disfrutes el producto. Gracias por utilizar RetroShop`
+     y lugar de la entrega:${reservationLocation}, esperamos que disfrutes el producto. Gracias por utilizar RetroShop`,
+     link 
   );
 };
 
