@@ -2,13 +2,15 @@ import express from "express";
 import authenticateToken from "../middlewares/middleToken.js";
 import { controllerGetReserva, controllerPurchaseConfirmation, controllerReservation, controllerGetReservations} from "../controllers/reservation/index.js";
 import controllerGetReservationsSeller from "../controllers/products/controllerGetReservationSeller.js";
+import controllerInsertReview from "../controllers/reservation/controllerInsertReview.js";
+
 
 
 const router = express.Router();
 
 router.post("/reservation/:productId", authenticateToken ,controllerReservation);
 
-
+router.put("/review/:productId",authenticateToken,controllerInsertReview)
 
 
 //COMPRA HECHA 

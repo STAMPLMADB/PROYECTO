@@ -1,8 +1,9 @@
 
 // En controllerInsertReview.js
-import { getIdReservation } from "../../models/reservation/index.js";
-import insertReviewByBuyer from "../../models/reservation/index.js";
+import { getIdReservation, insertReviewByBuyer } from "../../models/reservation/index.js";
+
 import { generateError } from "../../utils/index.js";
+
 
 const controllerInsertReview = async (req, res, next) => {
     try {
