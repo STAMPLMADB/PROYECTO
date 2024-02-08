@@ -12,7 +12,7 @@ const controllerDeleteProduct = async (req, res, next) => {
     const loggedUserId = req.user.id;
 
     const {product} = await selectProductById(id);
-    const {status} = await getStatusByProductId(product.id);
+    const status = await getStatusByProductId(product.id);
     console.log(status);
     if (!product) {
       generateError("El producto no existe", 400);
@@ -20,7 +20,7 @@ const controllerDeleteProduct = async (req, res, next) => {
     if(status) {
       return res.status(400).json({ error:"el articulo tiene una reserva"})
     }
-    if (product.seller.id !== loggedUserId) {
+    if (product.sellerId !== loggedUserId) {
       return res.status(400).json({ error:"No eres el propietario de este producto"});
     }
 

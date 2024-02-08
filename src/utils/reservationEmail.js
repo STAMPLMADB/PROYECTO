@@ -1,14 +1,14 @@
 import sendMail from "./sendMail.js";
 
-const reservationEmail = async (email, reservationId,buyerEmail) => {
-
-  const link = `http://localhost:5173/confirmacion/${reservationId}/${email}`
+const reservationEmail = async (email, reservationId) => {
+const ruta = "/profile/seller"
+  const link = `http://localhost:5173/confirmacion/${reservationId}/${email}/${encodeURIComponent(ruta)}`
   
   await sendMail(
     email,
     "Propuesta de compra",
-    `¡Felicidades un usuario se ha interesado por tu producto! Pincha aquí para aceptar la propuesta de compra 
-    el correo del usuario con el ue tienes que contactar es ${buyerEmail}`,
+    `¡Felicidades un usuario se ha interesado por tu producto! Pincha aquí para indicar en la ficha del producto   la hora  y el lugar de la entrega.
+   `,
   link
 
   );
