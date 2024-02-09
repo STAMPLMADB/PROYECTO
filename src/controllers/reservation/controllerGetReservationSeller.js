@@ -8,6 +8,7 @@ const controllerGetReservationsSeller = async (req, res, next) => {
       p.*,
       IFNULL(r.status, 'sin reserva') AS status,
       r.id AS reserva,
+      r.review AS review,
       u.name AS seller_name
   FROM 
       products p
