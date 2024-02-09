@@ -1,7 +1,7 @@
 import express from "express";
 import authenticateToken from "../middlewares/middleToken.js";
 import { controllerGetReserva, controllerPurchaseConfirmation, controllerReservation, controllerGetReservations} from "../controllers/reservation/index.js";
-import controllerGetReservationsSeller from "../controllers/products/controllerGetReservationSeller.js";
+import controllerGetReservationsSeller from "../controllers/reservation/controllerGetReservationSeller.js";
 import controllerInsertReview from "../controllers/reservation/controllerInsertReview.js";
 
 
