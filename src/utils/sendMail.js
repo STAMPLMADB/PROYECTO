@@ -11,9 +11,9 @@ const transport = nodemailer.createTransport({
 });
 
 const createDynamicHTML = (text, link) => {
-  return `<div style="background-image: url(https://i.pinimg.com/564x/f3/a6/29/f3a629d585af11298a8d99c25e658f7c.jpg); background-size: cover; 
+  return `<div style="background-image: url(https://scontent.fmad6-1.fna.fbcdn.net/v/t39.30808-6/426168357_122110965890200056_9007901339209577468_n.png?_nc_cat=110&ccb=1-7&_nc_sid=783fdb&_nc_ohc=yINBA_G2TR0AX_bhiFA&_nc_ht=scontent.fmad6-1.fna&oh=00_AfBbETLEaqP-yhuAz1SwUsQHIa8mqiBxHiVIuX_r28vDxw&oe=65CE3089); background-size: contain ; background-repeat: no-repeat;
   padding: 20px;
-   width: 600px; 
+   width: 1200px; 
   height: 600px; 
   display: flex !important; 
   justify-content: center !important;
@@ -22,7 +22,7 @@ const createDynamicHTML = (text, link) => {
     color: black; 
     font-weight: bold;
      font-size: 2rem;">
-  <h1 style="font-size: 3rem;">RETROSHOP</h1>
+  
   <p>${text}</p>
   <a href="${link}">Enlace</a>
 </div>`;
