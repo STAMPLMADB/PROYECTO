@@ -5,6 +5,8 @@ import updateReservationStatus from "./updateReservationStatus.js";
  import  getStatusByProductId from "./getStatusByProductId.js";
  import getIdReservation from "./getIdReservation.js";
  import insertReviewByBuyer from "./insertReviewByBuyer.js"
+ import deleteReservation from "./deleteReservation.js";
+ import selectReservationById from "./selectReservationById.js";
 
 export {
   createReservation,
@@ -14,4 +16,6 @@ export {
   getStatusByProductId,
   getIdReservation,
   insertReviewByBuyer,
+  deleteReservation,
+  selectReservationById,
 };
