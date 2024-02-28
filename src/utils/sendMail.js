@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } from "../../env.js";
+import localforage from "localforage";
 
 const transport = nodemailer.createTransport({
   host: SMTP_HOST,
@@ -28,14 +29,15 @@ const createDynamicHTML = (text, link) => {
 </div>`;
 };
 
-const sendMail = async (email, subject, text, link) => {
+const sendMail = async (email, subject, link, html) => {
   const mailOptions = {
     from: SMTP_USER,
     to: email,
     subject,
-    text,
-    html: createDynamicHTML(text, link),
+    html: html(link),
   };
+
+  console.log('este es el html en sendmail', html);
   await transport.sendMail(mailOptions);
 };
 

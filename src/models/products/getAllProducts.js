@@ -13,7 +13,7 @@ HAVING BIT_OR(r.status != 'finalizada' OR r.status is null)`;
     query += ` LIMIT ${limit}`;
   }
   const [rows] = await pool.query(query);
-  console.log(rows);
+  //console.log(rows);
   return rows;
 };
 
