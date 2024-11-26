@@ -10,5 +10,5 @@ const pool = mysql.createPool({
   password: DB_PASSWORD,
   port: DB_PORT,
 });
-
+await pool.query(`USE ${DB_NAME}`);
 export default pool;
